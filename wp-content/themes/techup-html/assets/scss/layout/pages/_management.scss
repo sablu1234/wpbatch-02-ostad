@@ -1,0 +1,306 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  8.5 Management css
+/*----------------------------------------*/
+
+
+.tp-management {
+    &-thumb-wrapper {
+        position: absolute;
+        top: 0;
+        left: -20px;
+        width: 50%;
+        height: 100%;
+        padding-right: 70px;
+        @media #{$xl} {
+            left: 0;
+        }
+        @media #{$lg} {
+            left: -25px;
+        }
+        @media #{$md} {
+            position: static;
+            width: 100%;
+            height: 100%;
+            margin-bottom: 50px;
+            padding: 0;
+        }
+        @media #{$xs} {
+            position: static;
+            width: 100%;
+            height: 100%;
+            margin-bottom: 50px;
+            padding-right: 0;
+        }
+        & img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    &-thum-content{
+        &-title {
+            font-size: 24px;
+            @media #{$xl,$lg} {
+                font-size: 22px;
+            }
+            @media #{$xs} {
+            font-size: 20px;
+            }
+        }
+    }
+    &-thum-content {
+        &-date {
+            font-size: 36px;
+            letter-spacing: -1px;
+            color: var(--tp-theme-primary);
+            font-weight: 700;
+        }
+    }
+    &-progres-skill {
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 0px 60px 0px rgba(109, 113, 134, 0.08);
+        padding: 30px 60px 20px;
+        @media #{$xs} {
+            padding: 30px 30px 20px;
+        }
+        @media #{$sm} {
+            padding: 30px 50px 20px;
+        }
+        &-2 {
+            background: none;
+            padding: 0;
+            box-shadow: none;
+        }      
+    }
+    &-icon-item {
+        position: relative;
+        &::before{
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            top: -17px;
+            left: 0;
+            background: var(--tp-theme-primary);
+            }
+    }
+    &-icon {
+        & span {
+            color: var(--tp-theme-primary);
+            font-size: 50px;
+            margin-left: 42px;
+            margin-right: 30px;
+        }
+    }
+    &-icon-title {
+        & h4 {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 30px;
+            @media #{$xs} {
+                font-size: 14px;
+                line-height: 22px;
+            }
+        }
+    }
+
+    // Home 4 Style
+
+    &-4 {
+        &-wrapper {
+            margin-left: -30px;
+            @media #{$lg,$md,$xs} {
+                padding-top: 20px;
+                margin-left: 0;
+            }
+        }
+        &-thumb {
+            position: relative;
+            top: -40px;
+            z-index: 11;
+            & img {
+                @media #{$lg,$md,$xs} {
+                    width: 100%;
+                }
+            }
+            &-shape {
+                position: absolute;
+                left: 0;
+                top: 24%;
+                animation: bounce-thum-3 4s forwards infinite alternate;
+            }
+        }
+        &-paragaph {
+            font-size: 18px;
+            color: var(--tp-text-14);
+            font-weight: 600;
+            font-family: var(--tp-ff-heading);
+            @media #{$md} {
+                width: 66%;
+            }
+            @media #{$xs} {
+                font-size: 15px;
+            }
+        }
+        &-icon-box {
+            border-bottom: 1px solid var(--tp-grey-16);
+            padding-bottom: 12px;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        &-icon {
+            & span {
+                color: var(--tp-theme-primary);
+                font-size: 62px;
+            }
+        }
+        &-content  {
+            & h4 {
+                font-size: 24px;
+                color: var(--tp-heading-2);
+                @media #{$xs} {
+                    font-size: 20px;
+                }
+            }
+            & p {
+                color: var(--tp-text-10);
+                @media #{$xs} {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    // Home style 5
+
+    &-5 {
+        &-area {
+            padding: 220px 0 130px;
+            @media #{$lg,$md} {
+                padding: 115px 0 130px;
+            }
+            @media #{$xs} {
+                padding: 50px 0 130px;
+            }
+        }
+        &-bg-shape {
+            @media #{$xs} {
+                display: none;
+            }
+        }
+        &-thumb {
+            & img {
+                @media #{$lg} {
+                    width: 100%;
+                    margin-top: 120px;
+                }
+                @media #{$xs} {
+                    width: 100%;
+                }
+            }
+        }
+        &-bg-shape-1 {
+            position: absolute;
+            top: 25%;
+            left: 14%;
+            animation: moving 6s linear infinite;
+            @media #{$lg} {
+                top: 17%;
+            }
+        }
+        &-bg-shape-2 {
+            position: absolute;
+            bottom: 35%;
+            left: 60px;
+            animation: moving 8s linear infinite;
+            @media #{$lg} {
+                bottom: 40%;
+            }
+        }
+        &-bg-shape-3 {
+            position: absolute;
+            bottom: 35%;
+            left: 50%;
+            animation: moving 6s linear infinite;
+        }
+        &-bg-shape-4 {
+            position: absolute;
+            right: 0;
+            z-index: -1;
+            bottom: 122px;
+            animation: moving 8s linear infinite;
+            @media #{$lg} {
+                display: none;
+            }
+        }
+        &-bg-shape-5 {
+            position: absolute;
+            right: 9%;
+            top: 41%;
+            animation: moving 6s linear infinite;
+        }
+        &-bg-shape-6 {
+            position: absolute;
+            top: -55px;
+            left: 0;
+            z-index: -1;
+            animation: bounce-thum-3 4s forwards infinite alternate;
+        }
+    }
+    
+}
+
+label {
+    font-size: 16px;
+    color: var(--tp-text-skill);
+    font-weight: 700;
+}
+.progress {
+    overflow: visible;
+    margin-top: 10px;
+    height: 1px;
+    background: var(--tp-common-black);
+}
+
+.progress-2 {
+	height: 1px;
+	background: transparent;
+	border: 1px solid var(--tp-grey-17);
+	padding: 4px 0 4px 2px;
+    border-radius: 0;
+}
+.progress-bar {
+    overflow: visible;
+    color: var(--tp-text-skill);
+    text-align: right;
+    background-color: var(--tp-theme-primary);
+    height: 3px;
+    margin-top: -1px;
+}
+.progress-bar-2 {
+	background: var(--tp-heading-1);
+	height: 4px;
+    margin-top: -2px;
+}
+.progress-bar span {
+    font-size: 16px;
+    position: relative;
+    top: -22px;
+    color: var(--tp-text-skill);
+    font-weight: 700;
+    font-family: var(--tp-ff-heading);
+}
+
+
+
+
+
+
+
+
+
+
+

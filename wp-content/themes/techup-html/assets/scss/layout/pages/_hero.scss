@@ -1,0 +1,49 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  8.4 Hero css
+/*----------------------------------------*/
+
+.#{$theme-prifix}-hero{
+    &-height{
+        min-height: 950px;
+    }
+    &-content{
+        padding-right: 80px;
+        & > span{
+            font-size: 24px;
+            font-weight: 700;
+            @extend %ff-garamond;
+            color: var(--tp-common-white);
+
+            & img{
+                @include transform(translateY(-7px));
+            }
+        }
+
+        & p{
+            font-size: 20px;
+            line-height: 1.4;
+            color: rgba($color: $white, $alpha: .7);
+            padding-left: 100px;
+        }
+    }
+    &-title{
+        font-size: 100px;
+        color: var(--tp-common-white);
+        font-weight: 700;
+        @extend %ff-dmsans;
+        line-height: 1;
+        letter-spacing: -0.04em;
+
+        & span{
+            @extend %ff-garamond;
+            @include gradient((90.68deg, #BCFFA4 8.59%, #BCFFA4 8.59%, #F59571 86.19%));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            padding-right: 3px;
+        }
+    }
+}

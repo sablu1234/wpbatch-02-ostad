@@ -1,0 +1,35 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  6.1 Footer Style 1
+/*----------------------------------------*/
+
+//footer widget style
+.#{$theme-prifix}-footer-widget{
+
+}
+
+/* footer col design for home 1 */
+.footer-col{
+    &-1{
+        padding-right: 95px;
+
+        @media #{$lg, $md, $sm,$xs}{
+            padding-right: 0;
+        }
+    }
+    &-2{
+        @media #{$md}{
+            padding-left: 25px;
+        }
+    }
+    &-3{
+        padding-left: 35px;
+        @media #{$sm, $xs}{
+            padding-left: 0;
+        }
+    }
+    &-4{
+
+    }
+}

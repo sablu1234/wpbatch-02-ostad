@@ -1,0 +1,154 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.4 Brand css
+/*----------------------------------------*/
+
+.tp-brand {
+  &-img-thum {
+    @media #{$xs} {
+      text-align: center;
+   }
+    & img {
+      margin: 0px 38px;
+      cursor: pointer;
+      opacity: 0.3;
+      transition: .4s;
+      margin-bottom: 30px;
+      @media #{$md,$xs} {
+        margin: 0;
+     }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  &-slider-active {
+    & .swiper-slide-active {
+      & .tp-brand-img-thum {
+        & img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &-4 {
+    &-slide-text-box {
+        margin-top: 20px;
+        & ul {
+          & li {
+            list-style: none;
+            & img {
+              display: inline-block;
+              margin: 0 58px;
+              margin-top: -26px;
+              @media #{$xl} {
+                margin: 0px 32px;
+              }
+              @media #{$lg} {
+                margin: 0 40px 0 30px;
+              }
+              @media #{$md} {
+                margin: 0 12px;
+                width: 15%;
+              }
+              @media #{$xs} {
+                margin: 0 12px;
+                width: 15%;
+              }
+            }
+            & span {
+              font-size: 60px;
+              letter-spacing: -2px;
+              color: var(--tp-heading-2);
+              font-weight: 700;
+              font-family: var(--tp-ff-heading);
+              display: inline-block;
+              @media #{$x4l} {
+                font-size: 51px;
+              }
+              @media #{$x3l} {
+                font-size: 47px;
+              }
+              @media #{$xxl} {
+                font-size: 38px;
+              }
+              @media #{$xl} {
+                font-size: 36px;
+              }
+              @media #{$lg} {
+                font-size: 26px;
+              }
+              @media #{$md} {
+                font-size: 24px;
+              }
+              @media #{$xs} {
+                font-size: 22px;
+              }
+            }
+          }
+        }
+    }
+  }
+
+
+  &-5 {
+    &-area {
+      @media #{$lg,$md,$xs} {
+        padding-bottom: 90px;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 1px;
+        left: 0;
+        bottom: 0;
+        background-color: var(--tp-grey-12);
+        right: 0;
+        margin: auto;
+        z-index: -1;
+      }
+    }
+    &-top-width {
+      padding: 0 100px 0;
+      @media #{$md} {
+        padding: 0 70px 0;
+        margin: auto;
+      }
+      @media #{$xs} {
+        padding: 0px 70px 0 89px;
+      }
+      @media #{$sm} {
+        padding: 0px 70px 0;
+      }
+    }
+    &-bottom-width {
+      padding: 0 200px 0;
+      @media #{$lg} {
+        padding: 0 100px 0;
+      }
+      @media #{$md} {
+        padding: 0 164px 0;
+      }
+      @media #{$xs} {
+        padding: 0 70px 0 89px;
+      }
+      @media #{$sm} {
+        padding: 0px 70px 0;
+      }
+    }
+    &-thumb {
+      filter: drop-shadow(0 0 20px rgba(45,21,85,0.06));
+      margin-bottom: 30px;
+    }
+
+  }
+}
+
+
+
+
+
+

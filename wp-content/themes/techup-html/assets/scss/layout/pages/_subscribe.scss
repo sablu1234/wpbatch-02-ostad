@@ -1,0 +1,96 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  9.3 Subscribe css
+/*----------------------------------------*/
+
+
+
+.tp-subscribe {
+    &-area {
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+	&-right-box {
+		width: 60%;
+		margin: auto;
+		@media #{$xs} {
+			width: 100%;
+		} 
+		& input {
+			height: 68px;
+			line-height: 80px;
+			font-size: 16px;
+			background-color: var(--tp-common-white);
+			border: 5px solid var(--tp-text-24);
+			padding-right: 140px;
+			&:focus {
+				border-color: var(--tp-text-24);
+			}
+		}
+	}
+	&-button {
+		position: absolute;
+		top: 50%;
+		right: 0px;
+		transform: translateY(-50%);
+	}
+	&-btn {
+		background: var(--tp-text-25);
+		color: var(--tp-common-white);
+		padding: 14px 35px;
+		display: inline-block;
+		font-weight: 700;
+		font-family: var(--tp-ff-heading);
+		border: 5px solid var(--tp-text-24);
+	}
+	&-inner-bg {
+		background-position: center center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		padding: 115px 0 120px;
+		border-radius: 10px;
+		margin: 0 245px 0;
+		@media #{$xxl,$xl,$lg,$md} {
+			margin: 0 40px 0;
+		}
+		@media #{$xs} {
+			margin: 0;
+		}
+	}
+	&-inner-subtitle {
+		font-size: 16px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: #bdbfd2;
+		font-weight: 700;
+		font-family: var(--tp-ff-heading);
+		margin-bottom: 12px;
+  		display: inline-block;
+	}
+	&-inner-title {
+		font-size: 50px;
+		letter-spacing: -2px;
+		color: var(--tp-common-white);
+		margin-bottom: 42px;	  
+		@media #{$xs} {
+			font-size: 31px;
+		}
+	}
+	&-inner-padding {
+		padding-top: 320px;
+		margin-top: -200px;
+	}
+	&-inner-btn {
+		& .tp-header-btn {
+			&::after {
+				background: var(--tp-common-white);
+			}
+			&:hover {
+				color: var(--tp-heading-primary);
+			}
+		}
+	}
+}

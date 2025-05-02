@@ -1,0 +1,99 @@
+@use '../../utils' as *;
+
+
+
+/*----------------------------------------*/
+/*  9.2 Step css
+/*----------------------------------------*/
+
+
+
+
+.tp-step {
+    &-wrapper {
+        box-shadow: 0px 0px 60px 0px rgba(35, 18, 60, 0.08);
+        padding: 80px 30px 20px 30px;
+        @media #{$md,$xs} {
+            margin-bottom: 70px;
+        } 
+    }
+    &-lt-mb {
+        @media #{$lg} {
+            margin-top: 40px;
+        } 
+    }
+    &-title {
+        color: var(--tp-heading-2);
+        &:hover {
+            color: var(--tp-theme-primary);
+        }
+    }  
+    &-paragraph {
+        font-size: 16px;
+        line-height: 28px;
+        color: var(--tp-text-10);
+        font-weight: 400;
+        font-family: "DM Sans";
+        @media #{$sm} {
+            font-size: 14px;
+        }
+    }
+    &-icon-box {
+        position: absolute;
+        top: -45px;
+        left: 32px;
+    }
+    &-icon {
+        & span {
+            width: 90px;
+            height: 90px;
+            line-height: 100px;
+            display: inline-block;
+            box-shadow: 0px 0px 40px 0px rgba(35, 18, 60, 0.08);
+            text-align: center;
+            border-radius: 5px;
+            font-size: 46px;
+            color:  var(--tp-heading-2);
+            background: var(--tp-common-white);
+            transition: .4s;
+        }
+    }
+    &-number {
+        & span {
+            background:  var(--tp-heading-2);
+            color: var(--tp-common-white);
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            text-align: center;
+            line-height: 40px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: var(--tp-ff-heading);
+            position: relative;
+            transition: .4s;
+            &::after {
+                content: "";
+                position: absolute;
+                top: 16px;
+                right: -10px;
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+                border-width: 5px 0 5px 10px;
+                border-color: transparent transparent transparent  var(--tp-heading-2);
+                transform: rotate(0deg);
+                transition: .4s;
+            }
+        }
+    }
+}
+.tp-step-wrapper:hover .tp-step-icon span {
+    color: var(--tp-theme-primary);
+}
+.tp-step-wrapper:hover .tp-step-number span {
+    background: var(--tp-theme-primary);
+}
+.tp-step-wrapper:hover .tp-step-number span::after {
+    border-color: transparent transparent transparent  var(--tp-theme-primary);
+}

@@ -1,0 +1,23 @@
+@use '../../utils' as *;
+
+
+
+
+.tp-header {
+    &-search.style-2 {
+        width: 63px;
+    }
+    &-shop.style-2 {
+        width: 64px;
+    }
+    &-toggle-line {
+        cursor: pointer;
+        & span {
+            display: block;
+            width: 30px;
+            height: 2px;
+            background-color: var(--tp-heading-4);
+            margin: 12px 0;
+        }
+    }   
+}   

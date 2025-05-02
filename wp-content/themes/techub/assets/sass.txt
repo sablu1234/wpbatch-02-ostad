@@ -1,0 +1,1 @@
+sass --watch "C:\Users\MR Pure\Dropbox\Bulbul pure\techub\assets\scss\main.scss":"C:\Users\MR Pure\Dropbox\Bulbul pure\techub\assets\css\main.css"
