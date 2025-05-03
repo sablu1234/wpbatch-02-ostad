@@ -61,3 +61,12 @@ function add_theme_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
+
+
+
+
+function techub_load_kirki_file() {
+    // Kirki include
+    include_once get_template_directory() . '/inc/techub-kirki.php';
+}
+add_action( 'after_setup_theme', 'techub_load_kirki_file' );
