@@ -1,52 +1,10 @@
+<?php
+$address_text = get_theme_mod('address_text','Manchester 21, Zurich, CH');
+$address_url = get_theme_mod('address_url','#');
+$email_address = get_theme_mod('email_address','techubinfo@mail.com');
 
-<?php echo get_template_part('template-parts/header/header-search'); ?>
+?>
 
-    <!-- tp-offcanvus-area-start -->
-    <div class="tpoffcanvas-area">
-        <div class="tpoffcanvas">
-            <div class="tpoffcanvas__close-btn">
-                <button class="close-btn"><i class="fal fa-times"></i></button>
-            </div>
-            <div class="tpoffcanvas__logo">
-                <a href="index.html">
-                    <img src="assets/img/logo/logo.png" alt="">
-                </a>
-            </div>
-            <div class="tpoffcanvas__title">
-                <p>Techub is the partner of choice for many of the world’s leading enterprises. We help businesses development.</p>
-            </div>
-            <div class="tp-main-menu-mobile d-xl-none"></div>
-            <div class="tpoffcanvas__contact-info">
-                <div class="tpoffcanvas__contact-title">
-                    <h5>Contact us</h5>
-                </div>
-                <ul>
-                    <li>
-                        <i class="fa-solid fa-location-dot"></i>
-                        <a href="https://www.google.com/maps/@23.8223586,90.3661283,15z" target="_blank">Manchester 21, Zurich, CH</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:techubinfo@mail.com"><span class="__cf_email__">techubinfo@mail.com</span></a>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-phone-flip"></i>
-                        <a href="tel:+48555223224">(+00) 678 345 98568</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="tpoffcanvas__social">
-                <div class="social-icon">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="body-overlay"></div>
-    <!-- tp-offcanvus-area-end -->
 
     
     <!-- header area start -->
@@ -56,8 +14,13 @@
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="tp-header-top-address tp-header-5-top-address">
-                            <span><i class="fa-thin fa-location-dot"></i><a href="https://www.google.com/maps/@41.6758525,-86.2531698,18.17z"> Manchester 21, Zurich, CH</a></span>
-                            <span><i class="fa-light fa-envelope"></i> <a href="mailto:techubinfo@mail.com">techubinfo@mail.com</a></span>
+                            <?php if(!empty($address_text)) : ?>
+                            <span><i class="fa-thin fa-location-dot"></i><a href="https://www.google.com/maps/@41.6758525,-86.2531698,18.17z"> <?php echo $address_text; ?></a></span>
+                            <?php endif;?>
+
+                            <?php if(!empty($email_address)) : ?>
+                            <span><i class="fa-light fa-envelope"></i> <a href="mailto:<?php echo $email_address;?>"><?php echo $email_address;?></a></span>
+                            <?php endif;?>
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -70,10 +33,7 @@
                                 </ul>
                             </div>
                             <div class="tp-header-top-social">
-                                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                                <?php techub_header_social();?>
                             </div>
                         </div>
                     </div>
@@ -148,3 +108,7 @@
         </div>
     </header>
     <!-- header area end -->
+
+    
+<?php echo get_template_part('template-parts/header/header-search'); ?>
+<?php echo get_template_part('template-parts/header/offcanvus'); ?>
