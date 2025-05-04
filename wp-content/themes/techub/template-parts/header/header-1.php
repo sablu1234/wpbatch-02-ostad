@@ -1,7 +1,7 @@
 <?php
-$address_text = get_theme_mod('address_text','Manchester 21, Zurich, CH');
-$address_url = get_theme_mod('address_url','#');
-$email_address = get_theme_mod('email_address','techubinfo@mail.com');
+$address_text = get_theme_mod('address_text',__('Manchester 21, Zurich, CH','techub'));
+$address_url = get_theme_mod('address_url',__('#','techub'));
+$email_address = get_theme_mod('email_address',__('techubinfo@mail.com','techub'));
 $header_top_switch = get_theme_mod('header_top_switch', false);
 
 ?>
@@ -17,11 +17,11 @@ $header_top_switch = get_theme_mod('header_top_switch', false);
                     <div class="col-xl-6">
                         <div class="tp-header-top-address tp-header-5-top-address">
                             <?php if(!empty($address_text)) : ?>
-                            <span><i class="fa-thin fa-location-dot"></i><a href="https://www.google.com/maps/@41.6758525,-86.2531698,18.17z"> <?php echo $address_text; ?></a></span>
+                            <span><i class="fa-thin fa-location-dot"></i><a href="<?php echo esc_url($address_url);?>"> <?php echo esc_html($address_text); ?></a></span>
                             <?php endif;?>
 
                             <?php if(!empty($email_address)) : ?>
-                            <span><i class="fa-light fa-envelope"></i> <a href="mailto:<?php echo $email_address;?>"><?php echo $email_address;?></a></span>
+                            <span><i class="fa-light fa-envelope"></i> <a href="mailto:<?php echo esc_attr($email_address);?>"><?php echo esc_html($email_address);?></a></span>
                             <?php endif;?>
                         </div>
                     </div>
@@ -116,3 +116,19 @@ $header_top_switch = get_theme_mod('header_top_switch', false);
     
 <?php echo get_template_part('template-parts/header/header-search'); ?>
 <?php echo get_template_part('template-parts/header/offcanvus'); ?>
+
+
+
+<?php
+
+$x = "<h1>hello</h1>";
+$y = "fb.com";
+
+echo ($x);
+?>
+
+<h1>Hello <?php esc_html__('WP','techub');?></h1>
+
+<img src="" alt="<?php echo esc_attr__('New Text', 'techub');?>">
+
+<a href="<?php echo esc_url($y);?>"></a>
