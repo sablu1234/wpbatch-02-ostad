@@ -1,5 +1,14 @@
 <?php
 
+
+function techub_header_logo(){
+    $header_logo = get_theme_mod('header_logo', get_template_directory_uri().'/assets/img/logo/logo.png');
+    ?>
+    <logo.png href="<?php echo home_url('/'); ?>"><img src="<?php echo $header_logo;?>'" alt=""></a>
+    <?php
+}
+
+// techub_header_social
 function techub_header_social(){
     $header_facebook_url = get_theme_mod('header_facebook_url','#');
     $header_instagram_url = get_theme_mod('header_instagram_url','#');

@@ -2,6 +2,7 @@
 $address_text = get_theme_mod('address_text','Manchester 21, Zurich, CH');
 $address_url = get_theme_mod('address_url','#');
 $email_address = get_theme_mod('email_address','techubinfo@mail.com');
+$header_top_switch = get_theme_mod('header_top_switch', false);
 
 ?>
 
@@ -9,6 +10,7 @@ $email_address = get_theme_mod('email_address','techubinfo@mail.com');
     
     <!-- header area start -->
     <header class="tp-header-height">
+    <?php if(!empty($header_top_switch)) : ?>
         <div class="tp-header-top tp-header-5-top pt-10 pb-10 pl-110 pr-110 d-none d-xl-block">
             <div class="container-fluid">
                 <div class="row">
@@ -40,13 +42,15 @@ $email_address = get_theme_mod('email_address','techubinfo@mail.com');
                 </div>
             </div>
         </div>
+        <?php endif;?>
+
         <div id="header-sticky" class="tp-header-bottom">
             <div class="tp-header-area">
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-4 col-md-4 col-6">
                             <div class="logo">
-                                <a href="index.html"><img src="<?php echo get_template_directory_uri() ?>/assets/img/logo/</a>logo.png" alt=""></a>
+                                <?php techub_header_logo();?>
                             </div>
                         </div>
                         <div class="col-xl-6 d-none d-xl-block">
