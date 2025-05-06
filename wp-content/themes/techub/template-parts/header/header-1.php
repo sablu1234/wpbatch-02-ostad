@@ -3,6 +3,12 @@ $address_text = get_theme_mod('address_text',__('Manchester 21, Zurich, CH','tec
 $address_url = get_theme_mod('address_url',__('#','techub'));
 $email_address = get_theme_mod('email_address',__('techubinfo@mail.com','techub'));
 $header_top_switch = get_theme_mod('header_top_switch', false);
+$header_right_side_switch = get_theme_mod('header_right_side_switch', false);
+
+$header_button_text = get_theme_mod('header_button_text',__('Get a Quete','techub'));
+$header_button_url = get_theme_mod('header_button_url',__('#','techub'));
+
+$menu_col = $header_right_side_switch == true ? '6' : '10 text-end';
 
 ?>
 
@@ -53,39 +59,18 @@ $header_top_switch = get_theme_mod('header_top_switch', false);
                                 <?php techub_header_logo();?>
                             </div>
                         </div>
-                        <div class="col-xl-6 d-none d-xl-block">
+                        <div class="col-xl-<?php echo esc_attr($menu_col); ?> d-none d-xl-block">
                             <div class="main-menu main-menu-5">
                                 <nav class="tp-main-menu-content">
-                                    <ul>
-                                        <li class="has-dropdown"><a class="color-active" href="index.html">Home</a></li>
-                                        <li class="has-dropdown"><a href="#">Pages</a>
-                                            <ul class="submenu tp-submenu">
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="team.html">Our Team</a></li>
-                                                <li><a href="team-details.html">Team Details</a></li>
-                                                <li><a href="portfolio.html">Our Portfolio</a></li>
-                                                <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                                                <li><a href="error.html">Error</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="portfolio.html">Portfolio</a></li>
-                                        <li class="has-dropdown"><a href="service.html">Services</a>
-                                            <ul class="submenu tp-submenu">
-                                                <li><a href="service.html">Our Service</a></li>
-                                                <li><a href="service-details.html">Service Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown"><a href="blog.html">Blog</a>
-                                            <ul class="submenu tp-submenu">
-                                                <li><a href="blog-sideber.html">Blog Sidebar</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
+
+                                <?php sectox_header_menu();?>
+
+                                   
                                 </nav>
                             </div>
                         </div>
+
+                        <?php if(!empty($header_right_side_switch)) : ?>
                         <div class="col-xl-4 col-lg-8 col-md-8 col-6">
                             <div class="tp-header-right d-flex justify-content-end align-items-center">
 
@@ -94,10 +79,12 @@ $header_top_switch = get_theme_mod('header_top_switch', false);
                                     <button><i class="flaticon-search"></i></button>
                                 </div>
 
+                                <?php if(!empty($header_button_text)) : ?>
                                 <!-- header button -->
                                 <div class="tp-header-button d-none d-lg-block">
-                                    <a class="tp-header-btn" rel="noreferrer" href="contact.html" target="_blank"><span>Get a Quete</span></a>
+                                    <a class="tp-header-btn" rel="noreferrer" href="<?php echo esc_url($header_button_url); ?>" target="_blank"><span><?php echo esc_html($header_button_text); ?></span></a>
                                 </div>
+                                <?php endif;?>
 
                                 <!-- header mobile menu ber -->
                                 <div class="tp-header-menu-ber">
@@ -106,6 +93,8 @@ $header_top_switch = get_theme_mod('header_top_switch', false);
 
                             </div>
                         </div>
+                        <?php endif;?>
+
                     </div>
                 </div>
             </div>
@@ -119,16 +108,3 @@ $header_top_switch = get_theme_mod('header_top_switch', false);
 
 
 
-<?php
-
-$x = "<h1>hello</h1>";
-$y = "fb.com";
-
-echo ($x);
-?>
-
-<h1>Hello <?php esc_html__('WP','techub');?></h1>
-
-<img src="" alt="<?php echo esc_attr__('New Text', 'techub');?>">
-
-<a href="<?php echo esc_url($y);?>"></a>

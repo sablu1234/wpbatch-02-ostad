@@ -19,10 +19,10 @@ function techub_theme_support(){
         'gallery',
         'quote',
         ) );
-    /** register nav menu   */
-    // register_nav_menus( array(
-    //     'main-menu' => __( 'Main Menu', 'techub' ),
-    // ) );
+
+        register_nav_menus( array(
+	    	'main-menu' => __( 'Main Menu', 'techub' ),
+		) );
 
 }
 add_action( 'after_setup_theme', 'techub_theme_support' );
@@ -32,6 +32,7 @@ add_action( 'after_setup_theme', 'techub_theme_support' );
 
 include_once get_template_directory() . '/inc/common/scripts.php';
 include_once get_template_directory() . '/inc/template-function.php';
+include_once get_template_directory() . '/inc/nav-walker.php';
 
 
 
