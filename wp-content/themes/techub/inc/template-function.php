@@ -28,4 +28,22 @@ function techub_header_social(){
     <a href="<?php echo esc_url($header_pinterest_url); ?>"><i class="fa-brands fa-pinterest"></i></a>
     <?php endif;?>
 
-<?php }
+<?php 
+}
+
+
+function sectox_header_menu(){
+    ?>
+    <?php
+    wp_nav_menu( 
+        array(
+        'theme_location' => 'main-menu',
+        'menu_class'      => '', 
+        'menu_id'         => '',
+        'container'         => '',
+        'fallback_cb'     => 'Techub_Walker_Nav_Menu::fallback',
+        'walker'          => new Techub_Walker_Nav_Menu,
+    ) );
+    ?>
+    <?php
+}
