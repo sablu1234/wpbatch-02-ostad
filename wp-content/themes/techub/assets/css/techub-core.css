@@ -5416,6 +5416,7 @@ body .ui-tooltip {
   visibility: visible;
 }
 
+/* HEADER CSS */
 /*----------------------------------------*/
 /*  3.1 Header Style 1
 /*----------------------------------------*/
@@ -5735,7 +5736,6 @@ body .ui-tooltip {
   color: var(--tp-common-white);
 }
 
-/* HEADER CSS */
 /*----------------------------------------*/
 /*  4.1 Main menu css
 /*----------------------------------------*/
@@ -20520,10 +20520,10 @@ label {
   font-weight: 500;
   margin-bottom: 18px;
 }
-.tp-footer-widget-content-input form {
+.tp-footer-widget-content-input {
   position: relative;
 }
-.tp-footer-widget-content-input form input {
+.tp-footer-widget-content-input input {
   color: var(--tp-common-white);
   background: transparent;
   border-color: var(--tp-text-7);
@@ -20532,10 +20532,10 @@ label {
   margin-bottom: 12px;
   padding-left: 42px;
 }
-.tp-footer-widget-content-input form input:focus {
+.tp-footer-widget-content-input input:focus {
   border-color: var(--tp-theme-primary);
 }
-.tp-footer-widget-content-input form input::placeholder {
+.tp-footer-widget-content-input input::placeholder {
   font-size: 16px;
   line-height: 36px;
   color: var(--tp-text-8);
@@ -20736,7 +20736,7 @@ label {
 .tp-footer-4-text p {
   color: var(--tp-text-10);
 }
-.tp-footer-4-input form input {
+.tp-footer-4-input input {
   border: none;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
   background: var(--tp-common-white) !important;
@@ -20853,4 +20853,4 @@ label {
   margin-top: -215px;
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=techub-core.css.map */

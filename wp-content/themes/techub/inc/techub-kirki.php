@@ -288,3 +288,38 @@ function techub_header_logo_section(){
 	);
 }
 techub_header_logo_section();
+
+// techub_footer_section
+function techub_footer_section(){
+	new \Kirki\Section(
+		'techub_footer_section',
+		[
+			'title'       => esc_html__( 'Footer', 'techub' ),
+			'description' => esc_html__( 'My Footer section Description.', 'techub' ),
+			'panel'       => 'techub_panel',
+			'priority'    => 160,
+		]
+	);
+
+	new \Kirki\Field\Image(
+	[
+		'settings'    => 'footer_bg_img',
+		'label'       => esc_html__( 'Footer BG Image', 'techub' ),
+		'description' => esc_html__( 'Please set your Footer BG Image', 'techub' ),
+		'section'     => 'techub_footer_section',
+	]
+);
+
+	// footer_copyright
+	new \Kirki\Field\Text(
+		[
+			'settings' => 'footer_copyright',
+			'label'    => esc_html__( 'Copyright Text', 'techub' ),
+			'section'  => 'techub_footer_section',
+			'default'  => esc_html__( 'Full Copyright & Design By @ Theme pure – 2024', 'techub' ),
+			'priority' => 10,
+		]
+	);
+
+}
+techub_footer_section();
