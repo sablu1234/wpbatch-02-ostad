@@ -1,0 +1,52 @@
+@use '../../utils' as *;
+
+
+
+.tp-header-top {
+	&-4 {
+		background: var(--tp-heading-2);
+		padding: 11px 110px;
+		@media #{$x3l} {
+			padding: 11px 80px;
+		}
+		@media #{$xxl} {
+			padding: 11px 60px;
+		}
+		@media #{$xl} {
+			padding: 11px 40px;
+		}
+	}
+}
+.tp-header {
+	&-4 {
+		&-bar {
+			font-size: 30px;
+			color: var(--tp-heading-primary);
+			margin-left: 30px;
+			margin-top: 10px;
+			@media #{$md} {
+				margin-left: 0;
+			}
+		}
+	}
+	&-5-bar {
+		font-size: 32px;
+		color: var(--tp-heading-secondary);
+		@media #{$lg} {
+			margin-left: 30px;
+		}
+	}
+}
+.tp-header {
+	&-5 {
+		&-top {
+			background: #212e44;
+			&-address {
+				& span {
+					color: var(--tp-common-white);
+				}
+			}
+		}
+
+	}
+}

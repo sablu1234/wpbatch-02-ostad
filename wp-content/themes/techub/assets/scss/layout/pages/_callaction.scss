@@ -1,0 +1,71 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.5 Callaction css
+/*----------------------------------------*/
+
+.tp-callaction {
+    &-area {
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 1;
+    }
+    &-bg-overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgb(18, 6, 44);
+        opacity: 0.8;
+        z-index: -1;
+    }
+    &-subheading {
+        font-size: 18px;
+        color: var(--tp-common-white);
+        font-weight: 500;
+        margin-bottom: 9px;
+        display: inline-block;
+        line-height: 28px;
+        font-family: var(--tp-ff-heading);
+        @media #{$xs} {
+            font-size: 13px;
+        }
+    }
+    &-heading {
+        font-size: 90px;
+        letter-spacing: -4px;
+        color: var(--tp-common-white);
+        margin-bottom: 34px;
+        @media #{$md} {
+            font-size: 78px;
+        }
+        @media #{$xs} {
+            font-size: 39px;
+            letter-spacing: -2px;
+        }
+    }
+    &-btn {
+        & .tp-btn {
+            &::after {
+                background-color: var(--tp-common-white);
+            }
+            &:hover {
+                color: var(--tp-heading-primary);
+            }
+        }
+    }
+    &-shape1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    &-shape2 {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+    }
+}

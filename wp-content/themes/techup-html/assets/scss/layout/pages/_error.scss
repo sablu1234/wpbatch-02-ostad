@@ -1,0 +1,40 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  8.0 Error css
+/*----------------------------------------*/
+
+
+.tp-error {
+    &-breadcrumb-area {
+        &::before {
+            background-color: #12022d;
+            opacity: 0.502;
+        }
+    }
+    &-breadcrumb-body {
+        color: var(--tp-common-white);
+        & span {
+            color: var(--tp-common-white);
+        }
+    }
+    &-thumb {
+        margin-bottom: 56px;
+        & img {
+            width: 100%;
+          }
+    }
+    &-title {
+        font-size: 36px;
+        letter-spacing: -1px;
+        color: #131313;
+        margin-bottom: 42px;
+    }
+    &-btn {
+        & .tp-header-btn {
+            padding: 19px 46px;
+        }
+    }
+
+}

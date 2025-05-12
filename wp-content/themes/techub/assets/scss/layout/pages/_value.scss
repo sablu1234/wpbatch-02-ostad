@@ -1,0 +1,57 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  9.7 Value css
+/*----------------------------------------*/
+
+
+.tp-value {
+    &-area {
+        background: var(--tp-common-gray2);
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    &-wrapper {
+        background: var(--tp-common-white);
+        filter: drop-shadow(0 0 30px rgba(14,11,18,0.06));
+        padding: 60px 80px 35px 60px;
+        border-radius: 15px;
+        &:hover {
+            & .tp-value-icon {
+                img {
+                    filter: brightness(0) invert(0);
+                }
+            }
+        }
+        @media #{$lg} {
+            padding: 60px 30px 35px 30px;
+        }
+        @media #{$xs} {
+            flex-direction: column;
+            padding: 60px 30px 35px 35px;
+        }
+    }
+    &-icon {
+        & img {
+            transition: 0.5s;
+        }
+    }
+    &-icon {
+        @media #{$lg} {
+            margin-right: 20px;
+        }
+        @media #{$xs} {
+            margin-right: 20px;
+            margin-bottom: 30px;
+        }
+    }
+    &-title {
+        letter-spacing: -1px;
+        margin-bottom: 24px;
+    }
+    &-paragraph {
+        color: var(--tp-text-10);
+    }
+}
