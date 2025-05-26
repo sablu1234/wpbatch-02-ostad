@@ -1,20 +1,18 @@
 <?php get_header();?>
 
-      <section class="tp-postbox-area pt-120 pb-120">
+ 
+<section class="tp-postbox-area pt-120 pb-120">
             <div class="container">
                 <div class="row">
                     <div class="col-xxl-8 col-xl-8 col-lg-8">
                         <div class="tp-postbox-wrapper">
 
-
                             <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-                           <?php get_template_part('template-parts/content', get_post_format());?>
+                                    <?php echo get_template_part('template-parts/content')?>
                             <?php endwhile; else : ?> 
-                            <p><?php _e( 'No Posts To Display.' ); ?></p>
+                                                <p><?php _e( 'No Posts To Display.' ); ?></p>
                             <?php endif; ?> 
 
-                     
-                     
                         </div>
                     </div>
                     <div class="col-xxl-4 col-xl-4 col-lg-4">
@@ -118,7 +116,6 @@
                 </div>
             </div>
         </section>
-
 
 
 <?php get_footer();
