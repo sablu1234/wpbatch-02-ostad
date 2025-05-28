@@ -35,6 +35,18 @@ add_action( 'after_setup_theme', 'techub_theme_support' );
  */
 function techub_widgets_init() {
 
+
+	register_sidebar( array(
+		'name'          => __( 'Blog Sidebar', 'techub' ),
+		'id'            => 'blog-sidebar',
+		'description'   => __( 'Widgets in this area will be shown on blog sidebar', 'techub' ),
+		'before_widget' => '<div id="%1$s" class="sidebar__widget mb-30 %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="sidebar__widget-title">',
+		'after_title'   => '</h3>',
+	) );
+
+
 	register_sidebar( array(
 		'name'          => __( 'Footer Widget 01', 'techub' ),
 		'id'            => 'footer-widget-1',
@@ -81,9 +93,14 @@ add_action( 'widgets_init', 'techub_widgets_init' );
 
 
 
+
+
+
+
 include_once get_template_directory() . '/inc/common/scripts.php';
 include_once get_template_directory() . '/inc/template-function.php';
 include_once get_template_directory() . '/inc/nav-walker.php';
+include_once get_template_directory() . '/inc/recent-post.php';
 
 
 

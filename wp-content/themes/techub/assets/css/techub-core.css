@@ -6674,7 +6674,7 @@ body .ui-tooltip {
   display: inline-block;
   margin-right: 15px;
 }
-.tp-postbox-pagination ul li a {
+.tp-postbox-pagination ul li a, .tp-postbox-pagination ul li span {
   position: relative;
   font-size: 14px;
   font-weight: 700;
@@ -6693,11 +6693,11 @@ body .ui-tooltip {
   transition: all 0.3s 0s ease-out;
   z-index: 1;
 }
-.tp-postbox-pagination ul li a.active {
+.tp-postbox-pagination ul li a.current, .tp-postbox-pagination ul li span.current {
   color: var(--tp-common-white);
   background: var(--tp-heading-primary);
 }
-.tp-postbox-pagination ul li a:hover {
+.tp-postbox-pagination ul li a:hover, .tp-postbox-pagination ul li span:hover {
   color: var(--tp-common-white);
   background: var(--tp-heading-primary);
 }

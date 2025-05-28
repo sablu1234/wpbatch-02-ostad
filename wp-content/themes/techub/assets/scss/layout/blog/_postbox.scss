@@ -133,7 +133,7 @@
         list-style: none;
         display: inline-block;
         margin-right: 15px;
-        & a {
+        & a, & span {
           position: relative;
           font-size: 14px;
           font-weight: 700;
@@ -151,7 +151,7 @@
           -o-transition: all 0.3s 0s ease-out;
           transition: all 0.3s 0s ease-out;
           z-index: 1;
-          &.active {
+          &.current {
             color: var(--tp-common-white);
             background: var(--tp-heading-primary);
           }

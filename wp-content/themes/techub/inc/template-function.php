@@ -161,3 +161,44 @@ function techub_kses( $allow_tags = '' ) {
 
 	return wp_kses( $allow_tags, $allowed_html );
 }
+
+// techub_navigation
+function techub_navigation(){
+   $pages = paginate_links( array( 
+       'type' => 'array',
+       'prev_text'    => __('<i class="fa-solid fa-arrow-left-long"></i>','harry'),
+       'next_text'    => __('<i class="fa-solid fa-arrow-right-long"></i>','harry'),
+   ) );
+       if( $pages ) {
+       echo '<div class="tp-postbox-pagination"><nav><ul>';
+       foreach ( $pages as $page ) {
+           echo "<li>$page</li>";
+       }
+       echo '</ul></nav></div>';
+   }
+}
+
+/**
+ * Generate custom search form
+ *
+ * @param string $form Form HTML.
+ * @return string Modified form HTML.
+ */
+function techub_search_form( $form ) {
+	$form = ' <div class="sidebar__widget-theme-bg">
+               <div class="sidebar__widget-content">
+                  <div class="sidebar__search">
+                        <form role="search" method="get" action="' . home_url( '/' ) . '">
+                           <div class="sidebar__search-input-2">
+                              <input type="text" value="' . get_search_query() . '" name="s" placeholder="Search here">
+                              <button type="submit"><i class="far fa-search"></i></button>
+                           </div>
+                        </form>
+                  </div>
+               </div>
+            </div>';
+
+	return $form;
+}
+add_filter( 'get_search_form', 'techub_search_form' );
+
