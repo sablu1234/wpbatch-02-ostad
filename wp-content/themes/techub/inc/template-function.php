@@ -202,3 +202,12 @@ function techub_search_form( $form ) {
 }
 add_filter( 'get_search_form', 'techub_search_form' );
 
+function techub_tags(){
+   $tags = get_the_tags();
+
+   foreach($tags as $tag){?>
+   <a href="<?php echo get_tag_link($tag)?>"><?php echo esc_html($tag->name)?></a>
+      <?php
+   }
+}
+
