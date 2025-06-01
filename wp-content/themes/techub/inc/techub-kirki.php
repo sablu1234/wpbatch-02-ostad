@@ -323,3 +323,28 @@ function techub_footer_section(){
 
 }
 techub_footer_section();
+
+
+// techub_breadcrumb_section
+function techub_breadcrumb_section(){
+	new \Kirki\Section(
+		'techub_breadcrumb_section',
+		[
+			'title'       => esc_html__( 'Breadcrumb', 'techub' ),
+			'description' => esc_html__( 'My Breadcrumb section Description.', 'techub' ),
+			'panel'       => 'techub_panel',
+			'priority'    => 160,
+		]
+	);
+
+	new \Kirki\Field\Image(
+	[
+		'settings'    => 'breadcrumb_bg_img',
+		'label'       => esc_html__( 'Breadcrumb BG Image', 'techub' ),
+		'description' => esc_html__( 'Please set your Footer Breadcrumb Image', 'techub' ),
+		'section'     => 'techub_breadcrumb_section',
+	]
+);
+
+}
+techub_breadcrumb_section();

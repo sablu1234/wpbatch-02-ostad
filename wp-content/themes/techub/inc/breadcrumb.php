@@ -59,13 +59,13 @@ function techub_breadcrumb(){
     <?php if(!empty($breadcrumb_switch) ) : ?>
 
 
-        <section class="tp-blog-breadcrumb-area" data-background="assets/img/blog/blog-sidebar-bg.jpg">
+        <section class="tp-blog-breadcrumb-area" data-background="<?php echo esc_url($breadcrumb_bg_img)?>">
             <div class="container">
                 <div class="row">
                     <div class="tp-portfolio-breadcrumb-content text-center">
                         <h2 class="tp-portfolio-breadcrumb-title"><?php echo techub_kses($title); ?></h2>
                         <p class="tp-portfolio-breadcrumb-body tp-blog-sideber-breadcrumb-body">
-                            <span><a href="index.html">TECHUB</a></span> <span class="spacing">/</span> BLOG SIDEBAR
+                            <?php bcn_display(); ?>
                     </p>
                     </div>
                 </div>
