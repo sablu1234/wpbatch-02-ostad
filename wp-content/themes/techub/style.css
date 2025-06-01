@@ -15,3 +15,11 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
     width: 72px;
     height: 72px;
 }
+
+ul.postbox__comment.mb-95 {
+    list-style: none;
+}
+
+.comment .children {
+    margin-left: 50p !important;
+}

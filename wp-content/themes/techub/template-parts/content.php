@@ -1,4 +1,8 @@
-<?php if(is_single()) :?>
+<?php 
+
+$has_tag_class = has_tag() ? 'text-lg-end' : '';
+
+if(is_single()) :?>
 
 <article id="post-<?php the_ID();?>" <?php post_class('tp-postbox-item mb-50');?>>
 
@@ -24,14 +28,16 @@
 
 <div class="tp-postbox-details-share-wrapper">
     <div class="row">
-        <div class="col-lg-6 col-md-6">
-            <div class="tp-postbox-details-tag">
-                 <span><?php echo esc_html__('Tag:','techub'); ?></span>
-                <?php techub_tags();?>
+        <?php if(has_tag()) : ?>
+            <div class="col-lg-6 col-md-6">
+                <div class="tp-postbox-details-tag">
+                    <span><?php echo esc_html__('Tag:','techub'); ?></span>
+                    <?php techub_tags();?>
+                </div>
             </div>
-        </div>
+        <?php endif;?>
         <div class="col-lg-6 col-md-6">
-            <div class="tp-postbox-details-share text-lg-end">
+            <div class="tp-postbox-details-share <?php echo esc_attr($has_tag_class);?>">
                 <span><?php echo esc_html__('Share:','techub'); ?></span>
 
                 <a href="https://www.linkedin.com/shareArticle?url=<?php the_permalink(); ?>" target="_blank">

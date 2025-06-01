@@ -102,6 +102,7 @@ include_once get_template_directory() . '/inc/template-function.php';
 include_once get_template_directory() . '/inc/nav-walker.php';
 include_once get_template_directory() . '/inc/recent-post.php';
 include_once get_template_directory() . '/inc/category-list.php';
+include_once get_template_directory() . '/inc/breadcrumb.php';
 
 
 
