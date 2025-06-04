@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
-class Techub_Hero extends Widget_Base {
+class Techub_Services_List extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -25,7 +25,7 @@ class Techub_Hero extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'techub-hero';
+		return 'techub-services-list';
 	}
 
 	/**
@@ -38,7 +38,7 @@ class Techub_Hero extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Hero', 'elementor-hello-world' );
+		return __( 'Services List', 'elementor-hello-world' );
 	}
 
 	/**
@@ -97,32 +97,35 @@ class Techub_Hero extends Widget_Base {
 	 * @access protected
 	 */
 	protected function register_controls() {
-
 		$this->register_controls_section();
 		$this->style_tab_content();
-
 	}
 
 	// style register control section
 	protected function register_controls_section(){
 		$this->start_controls_section(
-			'hero_section',
+			'services_section',
 			[
-				'label' => esc_html__( 'Title and Content', 'textdomain' ),
+				'label' => esc_html__( 'Services List', 'textdomain' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
-		$this->add_control(
-			'techub_sub_title',
+		$repeater = new \Elementor\Repeater();
+
+		$repeater->add_control(
+			'techub_image',
 			[
-				'label' => esc_html__( 'Sub Title', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Subtitle title', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your sub title here', 'textdomain' ),
+				'label' => esc_html__( 'Choose Image', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
 			]
 		);
-		$this->add_control(
+
+		
+		$repeater->add_control(
 			'techub_title',
 			[
 				'label' => esc_html__( 'Title', 'textdomain' ),
@@ -132,7 +135,7 @@ class Techub_Hero extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$repeater->add_control(
 			'techub_description',
 			[
 				'label' => esc_html__( 'Description', 'textdomain' ),
@@ -143,114 +146,44 @@ class Techub_Hero extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'techub_item_url',
+			[
+				'label' => esc_html__( 'URL', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( '#', 'textdomain' ),
+				'placeholder' => esc_html__( 'Url here', 'textdomain' ),
+			]
+		);
+
+
+		$this->add_control(
+			'item_list',
+			[
+				'label' => esc_html__( 'Services Item List', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::REPEATER,
+				'fields' => $repeater->get_controls(),
+				'default' => [
+					[
+						'techub_title' => esc_html__( 'Title #1', 'textdomain' ),
+						'techub_description' => esc_html__( 'Item content. Click the edit button to change this text.', 'textdomain' ),
+					],
+					[
+						'techub_title' => esc_html__( 'Title #2', 'textdomain' ),
+						'techub_description' => esc_html__( 'Item content. Click the edit button to change this text.', 'textdomain' ),
+					],
+				],
+				'title_field' => '{{{ techub_title }}}',
+			]
+		);
+
 		$this->end_controls_section();
 
 
-		$this->start_controls_section(
-			'techub_image_section',
-			[
-				'label' => esc_html__( 'Image', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'techub_image',
-			[
-				'label' => esc_html__( 'Choose Image', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
-				],
-			]
-		);
-		$this->add_control(
-			'techub_bg_image',
-			[
-				'label' => esc_html__( 'Background Image', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
-				],
-			]
-		);
-
-		$this->end_controls_section();
+	
 
 		
-		$this->start_controls_section(
-			'button_section',
-			[
-				'label' => esc_html__( 'Button 01', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
 
-		$this->add_control(
-			'button_text',
-			[
-				'label' => esc_html__( 'Button Text', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Button Text', 'textdomain' ),
-				'placeholder' => esc_html__( 'Button text here', 'textdomain' ),
-			]
-		);
-
-		$this->add_control(
-			'button_link',
-			[
-				'label' => esc_html__( 'Link', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::URL,
-				'options' => [ 'url', 'is_external', 'nofollow' ],
-				'default' => [
-					'url' => '#',
-					'is_external' => true,
-					'nofollow' => true,
-					// 'custom_attributes' => '',
-				],
-				'label_block' => true,
-			]
-		);
-
-		$this->end_controls_section();
-
-
-
-		$this->start_controls_section(
-			'button_2_section',
-			[
-				'label' => esc_html__( 'Button 02', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'button_2_text',
-			[
-				'label' => esc_html__( 'Button Text 2', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Button Text', 'textdomain' ),
-				'placeholder' => esc_html__( 'Button text here', 'textdomain' ),
-			]
-		);
-
-		$this->add_control(
-			'button_2_link',
-			[
-				'label' => esc_html__( 'Link 2', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::URL,
-				'options' => [ 'url', 'is_external', 'nofollow' ],
-				'default' => [
-					'url' => '#',
-					'is_external' => true,
-					'nofollow' => true,
-					// 'custom_attributes' => '',
-				],
-				'label_block' => true,
-			]
-		);
-
-		$this->end_controls_section();
 
 	}
 	
@@ -317,24 +250,62 @@ class Techub_Hero extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		// button 01
-		if ( ! empty( $settings['button_text'] ) ) {
-			$this->add_link_attributes( 'button_arg', $settings['button_link'] );
-			$this->add_render_attribute('button_arg','class','tp-btn');
-		}
-		// button 02
-		if ( ! empty( $settings['button_2_text'] ) ) {
-			$this->add_link_attributes( 'button_2_arg', $settings['button_2_link'] );
-			$this->add_render_attribute('button_2_arg','class','tp-btn tp-btn-white');
-		}
+	
 		
 		?>
+
+
+
+
+		<section class="tp-service-5-area pt-190 pb-90 p-relative fix">
+            <div class="container">
+                <div class="row">
+                    <div class="tp-section-5-title-wrapper mb-50 text-center wow fadeInUp">
+                        <span class="tp-section-5-subtitle">CHECK OUR SERVICES</span>
+                        <h3 class="tp-section-5-title">Service we provide our <span>clients</span></h3>
+                    </div>
+                </div>
+                <div class="row">
+					<?php foreach( $settings['item_list'] as $item ) : ?>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="tp-service-5-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                            <div class="tp-service-5-item d-flex">
+                                <div class="tp-service-5-thumb">
+                                    <img src="<?php echo esc_url($item['techub_image']['url']);?>" alt="">
+                                </div>
+                                <div class="tp-service-5-content">
+                                    <h4 class="tp-service-5-title">
+										
+										<?php if(!empty($item['techub_item_url'])) :?>
+											<a href="<?php echo esc_url($item['techub_item_url']);?>"><?php echo esc_html($item['techub_title']);?></a>
+										<?php else: ?>
+											<?php echo esc_html($item['techub_title']);?>
+										<?php endif; ?>
+										
+									</h4>
+                                    <p class="tp-service-5-paragraph"><?php echo esc_html($item['techub_description']);?></p>
+									<?php if(!empty($item['techub_item_url'])) :?>
+                                    <div class="tp-service-5-btn">
+                                        <a href="<?php echo esc_url($item['techub_item_url']);?>"><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+									<?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <?php endforeach;?>
+                </div>
+            </div>
+            <div class="tp-service-5-bg-shape">
+                <img src="assets/img/service/service-5-bg-shape.png" alt="">
+            </div>
+        </section>
 		
 
 		
 
 		
-		<section class="tp-slider-5-area p-relative z-index-1 fix">
+		<section class="tp-slider-5-area p-relative z-index-1 fix d-none">
             <div class="tp-slider-5-height">
 			<?php if(!empty($settings['techub_bg_image'])) : ?>
                 <div class="tp-slider-5-bg" style="background-image: url(<?php echo esc_url($settings['techub_bg_image']['url'])?>);"></div>
@@ -395,4 +366,4 @@ class Techub_Hero extends Widget_Base {
 }
 
 
-$widgets_manager->register( new Techub_Hero() );
+$widgets_manager->register( new Techub_Services_List() );
