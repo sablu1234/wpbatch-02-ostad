@@ -257,13 +257,9 @@ class Techub_Services_List extends Widget_Base {
 
 
 
-		<section class="tp-service-5-area pt-190 pb-90 p-relative fix">
+		<section class="tp-service-5-area p-relative fix">
             <div class="container">
                 <div class="row">
-                    <div class="tp-section-5-title-wrapper mb-50 text-center wow fadeInUp">
-                        <span class="tp-section-5-subtitle">CHECK OUR SERVICES</span>
-                        <h3 class="tp-section-5-title">Service we provide our <span>clients</span></h3>
-                    </div>
                 </div>
                 <div class="row">
 					<?php foreach( $settings['item_list'] as $item ) : ?>

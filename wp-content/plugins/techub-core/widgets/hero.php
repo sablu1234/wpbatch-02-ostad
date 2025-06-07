@@ -129,6 +129,7 @@ class Techub_Hero extends Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'Default title', 'textdomain' ),
 				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
+				'label_block' => true,
 			]
 		);
 
@@ -140,6 +141,7 @@ class Techub_Hero extends Widget_Base {
 				'rows' => 5,
 				'default' => esc_html__( 'Default description', 'textdomain' ),
 				'placeholder' => esc_html__( 'Type your description here', 'textdomain' ),
+				
 			]
 		);
 
