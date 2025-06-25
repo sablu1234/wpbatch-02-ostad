@@ -182,11 +182,69 @@ class Techub_Heading extends Widget_Base {
 	
 	// style tabs control section
 	protected function style_tab_content(){
+
 		$this->start_controls_section(
 			'techub_style_section',
 			[
-				'label' => esc_html__( 'Style', 'textdomain' ),
+				'label' => esc_html__( 'Sub Title', 'textdomain' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'sub_title_color',
+			[
+				'label' => esc_html__( 'Text Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .tp-el-sub-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'sub_title_typography',
+				'selector' => '{{WRAPPER}} .tp-el-sub-title',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'techub_title_style_section',
+			[
+				'label' => esc_html__( 'Title', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_typography',
+				'selector' => '{{WRAPPER}} .tp-el-title',
+			]
+		);
+
+		$this->add_control(
+			'title_margin',
+			[
+				'label' => esc_html__( 'Margin', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 2,
+					'right' => 0,
+					'bottom' => 2,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .tp-el-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -196,32 +254,35 @@ class Techub_Heading extends Widget_Base {
 				'label' => esc_html__( 'Text Color', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .el-title' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-el-title' => 'color: {{VALUE}}',
 				],
 			]
 		);
-		$this->add_control(
-			'text_color_2',
+		
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'techub_content_style_section',
 			[
-				'label' => esc_html__( 'Title Text Color', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .el-title-2' => 'color: {{VALUE}}',
-				],
+				'label' => esc_html__( 'Content', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
+
 		$this->add_control(
-			'text_color_des',
+			'text_color_desc',
 			[
-				'label' => esc_html__( 'Des Text Color', 'textdomain' ),
+				'label' => esc_html__( 'Color', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .el-desc' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-el-content' => 'color: {{VALUE}}',
 				],
 			]
 		);
 
+
 		$this->end_controls_section();
+
 	}
 		
 
@@ -252,11 +313,14 @@ class Techub_Heading extends Widget_Base {
 
 		 <div class="tp-section-5-title-wrapper wow fadeInUp tp-el-align">
 			<?php if(!empty($settings['techub_sub_title'])) : ?>
-			<span class="tp-section-5-subtitle"><?php echo techub_kses($settings['techub_sub_title'])?></span>
+			<span class="tp-section-5-subtitle tp-el-sub-title"><?php echo techub_kses($settings['techub_sub_title'])?></span>
 			<?php endif;?>
 
 			<?php if(!empty($settings['techub_title'])) : ?>
-			<h3 class="tp-section-5-title"><?php echo techub_kses($settings['techub_title'])?></span></h3>
+			<h3 class="tp-section-5-title tp-el-title"><?php echo techub_kses($settings['techub_title'])?></span></h3>
+			<?php endif;?>
+			<?php if(!empty($settings['techub_description'])) : ?>
+			<p class="tp-el-content"><?php echo techub_kses($settings['techub_description'])?></p>
 			<?php endif;?>
 		</div>
 		

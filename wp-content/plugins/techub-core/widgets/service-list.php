@@ -136,6 +136,17 @@ class Techub_Services_List extends Widget_Base {
 		);
 
 		$repeater->add_control(
+			'item_title_color',
+			[
+				'label' => esc_html__( 'Text Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} {{CURRENT_ITEM}} .tp-el-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$repeater->add_control(
 			'techub_description',
 			[
 				'label' => esc_html__( 'Description', 'textdomain' ),
@@ -180,9 +191,79 @@ class Techub_Services_List extends Widget_Base {
 		$this->end_controls_section();
 
 
-	
+		$this->start_controls_section(
+			'column_num',
+			[
+				'label' => esc_html__( 'Select Column', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
 
-		
+		$this->add_control(
+			'xl_column',
+			[
+				'label' => esc_html__( 'Column Desktop', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => '6',
+				'options' => [
+					'' => esc_html__( 'Default', 'textdomain' ),
+					'12' => esc_html__( '1 Column', 'textdomain' ),
+					'6' => esc_html__( '2 Column', 'textdomain' ),
+					'4' => esc_html__( '3 Column', 'textdomain' ),
+				],
+				
+			]
+		);
+
+		$this->add_control(
+			'lg_column',
+			[
+				'label' => esc_html__( 'Column Large', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => '6',
+				'options' => [
+					'' => esc_html__( 'Default', 'textdomain' ),
+					'12' => esc_html__( '1 Column', 'textdomain' ),
+					'6' => esc_html__( '2 Column', 'textdomain' ),
+					'4' => esc_html__( '3 Column', 'textdomain' ),
+				],
+				
+			]
+		);
+
+		$this->add_control(
+			'md_column',
+			[
+				'label' => esc_html__( 'Column Medium', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => '6',
+				'options' => [
+					'' => esc_html__( 'Default', 'textdomain' ),
+					'12' => esc_html__( '1 Column', 'textdomain' ),
+					'6' => esc_html__( '2 Column', 'textdomain' ),
+					'4' => esc_html__( '3 Column', 'textdomain' ),
+				],
+				
+			]
+		);
+
+		$this->add_control(
+			'xs_column',
+			[
+				'label' => esc_html__( 'Column Mobile', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => '12',
+				'options' => [
+					'' => esc_html__( 'Default', 'textdomain' ),
+					'12' => esc_html__( '1 Column', 'textdomain' ),
+					'6' => esc_html__( '2 Column', 'textdomain' ),
+					'4' => esc_html__( '3 Column', 'textdomain' ),
+				],
+				
+			]
+		);
+
+		$this->end_controls_section();
 
 
 	}
@@ -263,14 +344,14 @@ class Techub_Services_List extends Widget_Base {
                 </div>
                 <div class="row">
 					<?php foreach( $settings['item_list'] as $item ) : ?>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="tp-service-5-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                    <div class="col-xl-<?php echo esc_attr($settings['xl_column']); ?> col-lg-<?php echo esc_attr($settings['lg_column']); ?> col-md-<?php echo esc_attr($settings['md_column']); ?> col-<?php echo esc_attr($settings['xs_column']); ?>">
+                        <div class="tp-service-5-wrapper elementor-repeater-item-<?php echo esc_attr( $item['_id'] );?> mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                             <div class="tp-service-5-item d-flex">
                                 <div class="tp-service-5-thumb">
                                     <img src="<?php echo esc_url($item['techub_image']['url']);?>" alt="">
                                 </div>
                                 <div class="tp-service-5-content">
-                                    <h4 class="tp-service-5-title">
+                                    <h4 class="tp-service-5-title tp-el-title">
 										
 										<?php if(!empty($item['techub_item_url'])) :?>
 											<a href="<?php echo esc_url($item['techub_item_url']);?>"><?php echo esc_html($item['techub_title']);?></a>
@@ -294,62 +375,6 @@ class Techub_Services_List extends Widget_Base {
             </div>
             <div class="tp-service-5-bg-shape">
                 <img src="assets/img/service/service-5-bg-shape.png" alt="">
-            </div>
-        </section>
-		
-
-		
-
-		
-		<section class="tp-slider-5-area p-relative z-index-1 fix d-none">
-            <div class="tp-slider-5-height">
-			<?php if(!empty($settings['techub_bg_image'])) : ?>
-                <div class="tp-slider-5-bg" style="background-image: url(<?php echo esc_url($settings['techub_bg_image']['url'])?>);"></div>
-				<?php endif;?>
-                <div class="container">
-                    <div class="row align-items-end">
-                        <div class="col-xl-6 col-lg-6">
-                            <div class="tp-slider-5-content p-relative z-index-11">
-                                <div class="tp-slider-5-title-box mb-50 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-									<?php if(!empty($settings['techub_sub_title'])) : ?>
-                                    <span class="tp-slider-sub-title tp-slider-sub-title-5"><?php echo techub_kses($settings['techub_sub_title'])?></span>
-									<?php endif;?>
-
-									<?php if(!empty($settings['techub_title'])) : ?>
-                                    <h1 class="tp-slider-title tp-slider-title-5"><?php echo techub_kses($settings['techub_title'])?>
-                                    </h1>
-									<?php endif;?>
-									
-									<?php if(!empty($settings['techub_description'])) : ?>
-                                    <p class="tp-slider-5-paragraph"><?php echo esc_html($settings['techub_description'])?></p>
-									<?php endif;?>
-
-                                </div>
-                                <div class="tp-slider-5-btn-box d-inline-flex wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
-
-								<?php if(!empty($settings['button_text'])) : ?>
-									<a <?php echo $this->get_render_attribute_string( 'button_arg' ); ?>><span><?php echo esc_html($settings['button_text'])?></span></a>
-								<?php endif;?>
-
-								<?php if(!empty($settings['button_2_text'])) : ?>
-                                    <a <?php echo $this->get_render_attribute_string( 'button_2_arg' ); ?>><span><?php echo esc_html($settings['button_2_text'])?></span></a>
-								<?php endif;?>
-
-                                </div>
-                            </div>
-                        </div>
-						<?php if(!empty($settings['techub_image'])) : ?>
-                        <div class="col-xl-6 col-lg-6">
-                            <div class="tp-slider-5-thumb p-relative z-index-1">
-                                <img class="tp-slider-5-main-img" src="<?php echo esc_url($settings['techub_image']['url'])?>" alt="">
-                            </div>
-                        </div>
-						<?php endif;?>
-                    </div>
-                </div>
-            </div>
-            <div class="tp-slider-5-bg-shape">
-                <img class="tp-slider-5-bg-shape1" src="<?php echo get_template_directory_uri();?>/assets/img/slider/shape/slider-5-shape2.png" alt="">
             </div>
         </section>
 
