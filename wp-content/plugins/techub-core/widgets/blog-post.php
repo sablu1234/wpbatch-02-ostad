@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
-class Techub_BTN extends Widget_Base {
+class Techub_Blog_Post extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -25,7 +25,7 @@ class Techub_BTN extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'techub-btn';
+		return 'techub-blog-post';
 	}
 
 	/**
@@ -38,7 +38,7 @@ class Techub_BTN extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Techub Button', 'elementor-hello-world' );
+		return __( 'Blog Post', 'elementor-hello-world' );
 	}
 
 	/**
@@ -107,36 +107,10 @@ class Techub_BTN extends Widget_Base {
 	protected function register_controls_section(){
 
 		$this->start_controls_section(
-			'button_section',
+			'blog_post_section',
 			[
-				'label' => esc_html__( 'Button', 'textdomain' ),
+				'label' => esc_html__( 'Blog Post', 'textdomain' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'button_text',
-			[
-				'label' => esc_html__( 'Button Text', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Button Text', 'textdomain' ),
-				'placeholder' => esc_html__( 'Button text here', 'textdomain' ),
-			]
-		);
-
-		$this->add_control(
-			'button_link',
-			[
-				'label' => esc_html__( 'Link', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::URL,
-				'options' => [ 'url', 'is_external', 'nofollow' ],
-				'default' => [
-					'url' => '#',
-					'is_external' => true,
-					'nofollow' => true,
-					// 'custom_attributes' => '',
-				],
-				'label_block' => true,
 			]
 		);
 
@@ -213,17 +187,54 @@ class Techub_BTN extends Widget_Base {
 			$this->add_link_attributes( 'button_arg', $settings['button_link'] );
 			$this->add_render_attribute('button_arg','class','tp-btn');
 		}
+
+
+		$args = array(
+			'post_type' => 'post',
+			'posts_per_page' => -1,
+			// 'orderby' => 'title menu_order',
+			'order' => 'ASC',
+			'tax_query'        => array(
+				array(
+					'taxonomy' => 'category', // Must be registered on BOTH sites.
+					'field'    => 'slug',
+					'terms'    => 'wp', // The terms are not needed on the subsite.
+				),
+			),
+		);
+		$query = new \WP_Query( $args );
 		
 		?>
 
-		<?php if(!empty($settings['button_text'])) : ?>
-		<div class="techub-btn">
-			
-				<a <?php echo $this->get_render_attribute_string( 'button_arg' ); ?>><span><?php echo esc_html($settings['button_text'])?></span></a>
-			</div>
-		<?php endif;?>
+        <section class="tp-blog-5-area pt-150 pb-105">
+            <div class="container">
+                <div class="row">
+				<?php if ( $query->have_posts() ) : while( $query->have_posts()  ) : $query->the_post(); 
+					$categories = get_the_category(get_the_ID());
 
-
+					// var_dump($categories);
+				?>
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="tp-blog-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                            <div class="tp-blog-thumb">
+                                <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+                            </div>
+                            <div class="tp-blog-content">
+                                <div class="tp-blog-date d-flex">
+                                    <p><?php echo esc_html($categories[0]->name); ?></p>
+                                    <span><?php echo get_the_date(); ?></span>
+                                </div>
+                                <div class="tp-blog-content-inner">
+                                    <h4 class="tp-blog-content-inner-heading"><a href="<?php the_permalink(); ?>"><?php the_title(); ?> </a></h4>
+                                    <a class="tp-blog-btn" href="<?php the_permalink(); ?>">Read More <span><i class="flaticon-right-arrow"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				<?php endwhile; endif; ?>
+                </div>
+            </div>
+        </section>
 		<?php
 	}
 
@@ -231,4 +242,4 @@ class Techub_BTN extends Widget_Base {
 }
 
 
-$widgets_manager->register( new Techub_BTN() );
+$widgets_manager->register( new Techub_Blog_Post() );

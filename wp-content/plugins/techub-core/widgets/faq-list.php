@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
-class Techub_Card extends Widget_Base {
+class Techub_Faq_List extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -25,7 +25,7 @@ class Techub_Card extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'techub-portfolio-card';
+		return 'techub-faq-list';
 	}
 
 	/**
@@ -38,7 +38,7 @@ class Techub_Card extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Portfolio Card', 'elementor-hello-world' );
+		return __( 'Faq List', 'elementor-hello-world' );
 	}
 
 	/**
@@ -97,101 +97,62 @@ class Techub_Card extends Widget_Base {
 	 * @access protected
 	 */
 	protected function register_controls() {
-
 		$this->register_controls_section();
 		$this->style_tab_content();
-
 	}
 
 	// style register control section
 	protected function register_controls_section(){
 		$this->start_controls_section(
-			'design_section',
+			'faq_section',
 			[
-				'label' => esc_html__( 'Layout Style', 'textdomain' ),
+				'label' => esc_html__( 'Faq List', 'textdomain' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
-
-		$this->add_control(
-			'design_style',
-			[
-				'label' => esc_html__( 'Choose Layout', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'layout-1',
-				'options' => [
-					'layout-1' => esc_html__( 'Style 01', 'textdomain' ),
-					'layout-2' => esc_html__( 'Style 02', 'textdomain' ),
-				],
-				
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'hero_section',
-			[
-				'label' => esc_html__( 'Portfolio Info', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'techub_sub_title',
-			[
-				'label' => esc_html__( 'Sub Title', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Subtitle title', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your sub title here', 'textdomain' ),
-			]
-		);
-		$this->add_control(
+		$repeater = new \Elementor\Repeater();
+		
+		$repeater->add_control(
 			'techub_title',
 			[
 				'label' => esc_html__( 'Title', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'Default title', 'textdomain' ),
 				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
-				'label_block' => true,
 			]
 		);
 
-		$this->add_control(
-			'techub_url',
+		$repeater->add_control(
+			'techub_description',
 			[
-				'label' => esc_html__( 'URL', 'textdomain' ),
+				'label' => esc_html__( 'Description', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 5,
-				'default' => esc_html__( '#', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your url here', 'textdomain' ),
-				
-			]
-		);
-
-		$this->end_controls_section();
-
-
-		$this->start_controls_section(
-			'techub_image_section',
-			[
-				'label' => esc_html__( 'Image', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'default' => esc_html__( 'Default description', 'textdomain' ),
+				'placeholder' => esc_html__( 'Type your description here', 'textdomain' ),
 			]
 		);
 
 		$this->add_control(
-			'techub_image',
+			'item_list',
 			[
-				'label' => esc_html__( 'Choose Image', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
+				'label' => esc_html__( 'Services Item List', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::REPEATER,
+				'fields' => $repeater->get_controls(),
 				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
+					[
+						'techub_title' => esc_html__( 'Title #1', 'textdomain' ),
+						'techub_description' => esc_html__( 'Item content. Click the edit button to change this text.', 'textdomain' ),
+					],
+					[
+						'techub_title' => esc_html__( 'Title #2', 'textdomain' ),
+						'techub_description' => esc_html__( 'Item content. Click the edit button to change this text.', 'textdomain' ),
+					],
 				],
+				'title_field' => '{{{ techub_title }}}',
 			]
 		);
-
 
 		$this->end_controls_section();
 
@@ -260,35 +221,36 @@ class Techub_Card extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
+	
+		
 		?>
 
-		<?php if($settings['design_style'] == 'layout-2') : ?>
-		 <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-			<div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-				<img src="<?php echo esc_url($settings['techub_image']['url'])?>" alt="">
-				<div class="tp-project-3-down-content text-center">
-					<span><?php echo techub_kses($settings['techub_sub_title'])?></span>
-					<h4 class="tp-project-3-down-title"><a href="<?php echo esc_url($settings['techub_url'])?>"><?php echo techub_kses($settings['techub_title'])?></a></h4>
-				</div>
-			</div>
-		</div>
-		
-		<?php else: ?>
 
-		<div class="tp-project-5-wrapper wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-			<div class="tp-project-5-thumb m-0 p-relative">
-				<img src="<?php echo esc_url($settings['techub_image']['url'])?>" alt="">
-				<div class="tp-project-5-icon">
-					<a class="popup-image" href="<?php echo esc_url($settings['techub_image']['url'])?>"><i class="fa-thin fa-plus"></i></a>
+
+		<div class="tp-faq-5-collaps-wrapper wow fadeInRight">
+			<h2 class="tp-faq-5-collaps-title">Techub Have Answer</h2>
+			<div class="tp-faq-5-accordion accordion-flush" id="accordionFlushExample">
+				<?php foreach( $settings['item_list'] as $key => $item ) : 
+						$collapsed = $key == 0 ? '' : 'collapsed';
+						$show = $key == 0 ? 'show' : '';
+					?>
+				<div class="tp-faq-5-accordion-item accordion-item mb-10">
+					<h2 class="accordion-header">
+						<button class="tp-faq-5-accordion-title accordion-button <?php echo esc_attr($collapsed); ?>" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne-<?php echo esc_attr($key); ?>" aria-expanded="false" aria-controls="flush-collapseOne-<?php echo esc_attr($key); ?>">
+							<?php echo esc_html($item['techub_title']);?>
+							<span class="accordion-btn"></span>
+						</button>
+					</h2>
+					<div id="flush-collapseOne-<?php echo esc_attr($key); ?>" class="accordion-collapse collapse <?php echo esc_attr($show); ?>" data-bs-parent="#accordionFlushExample">
+						<div class="tp-faq-5-accordion-pera accordion-body"><?php echo esc_html($item['techub_description']);?></div>
+					</div>
 				</div>
-				<div class="tp-project-5-content text-center">
-					<span><?php echo techub_kses($settings['techub_sub_title'])?></span>
-					<h4 class="tp-project-5-title"><a href="<?php echo esc_url($settings['techub_url'])?>"><?php echo techub_kses($settings['techub_title'])?></a></h4>
-				</div>
+				<?php endforeach;?>
+
+
+
 			</div>
 		</div>
-		
-		<?php endif; ?>
 
 		<?php
 	}
@@ -297,4 +259,4 @@ class Techub_Card extends Widget_Base {
 }
 
 
-$widgets_manager->register( new Techub_Card() );
+$widgets_manager->register( new Techub_Faq_List() );

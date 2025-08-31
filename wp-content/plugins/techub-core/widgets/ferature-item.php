@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
-class Techub_Card extends Widget_Base {
+class Techub_Feature_List extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -25,7 +25,7 @@ class Techub_Card extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'techub-portfolio-card';
+		return 'techub-feature-list';
 	}
 
 	/**
@@ -38,7 +38,7 @@ class Techub_Card extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Portfolio Card', 'elementor-hello-world' );
+		return __( 'Feature List', 'elementor-hello-world' );
 	}
 
 	/**
@@ -97,91 +97,23 @@ class Techub_Card extends Widget_Base {
 	 * @access protected
 	 */
 	protected function register_controls() {
-
 		$this->register_controls_section();
 		$this->style_tab_content();
-
 	}
 
 	// style register control section
 	protected function register_controls_section(){
 		$this->start_controls_section(
-			'design_section',
+			'services_section',
 			[
-				'label' => esc_html__( 'Layout Style', 'textdomain' ),
+				'label' => esc_html__( 'Services List', 'textdomain' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
+		$repeater = new \Elementor\Repeater();
 
-		$this->add_control(
-			'design_style',
-			[
-				'label' => esc_html__( 'Choose Layout', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'layout-1',
-				'options' => [
-					'layout-1' => esc_html__( 'Style 01', 'textdomain' ),
-					'layout-2' => esc_html__( 'Style 02', 'textdomain' ),
-				],
-				
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'hero_section',
-			[
-				'label' => esc_html__( 'Portfolio Info', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'techub_sub_title',
-			[
-				'label' => esc_html__( 'Sub Title', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Subtitle title', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your sub title here', 'textdomain' ),
-			]
-		);
-		$this->add_control(
-			'techub_title',
-			[
-				'label' => esc_html__( 'Title', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Default title', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
-				'label_block' => true,
-			]
-		);
-
-		$this->add_control(
-			'techub_url',
-			[
-				'label' => esc_html__( 'URL', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 5,
-				'default' => esc_html__( '#', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your url here', 'textdomain' ),
-				
-			]
-		);
-
-		$this->end_controls_section();
-
-
-		$this->start_controls_section(
-			'techub_image_section',
-			[
-				'label' => esc_html__( 'Image', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
+		$repeater->add_control(
 			'techub_image',
 			[
 				'label' => esc_html__( 'Choose Image', 'textdomain' ),
@@ -192,8 +124,38 @@ class Techub_Card extends Widget_Base {
 			]
 		);
 
+		
+		$repeater->add_control(
+			'techub_title',
+			[
+				'label' => esc_html__( 'Title', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Default title', 'textdomain' ),
+				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
+			]
+		);
+
+		$this->add_control(
+			'item_list',
+			[
+				'label' => esc_html__( 'Services Item List', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::REPEATER,
+				'fields' => $repeater->get_controls(),
+				'default' => [
+					[
+						'techub_title' => esc_html__( 'Title #1', 'textdomain' ),
+					],
+					[
+						'techub_title' => esc_html__( 'Title #2', 'textdomain' ),
+					],
+				],
+				'title_field' => '{{{ techub_title }}}',
+			]
+		);
 
 		$this->end_controls_section();
+
+
 
 	}
 	
@@ -260,35 +222,26 @@ class Techub_Card extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
+	
+		
 		?>
 
-		<?php if($settings['design_style'] == 'layout-2') : ?>
-		 <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-			<div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-				<img src="<?php echo esc_url($settings['techub_image']['url'])?>" alt="">
-				<div class="tp-project-3-down-content text-center">
-					<span><?php echo techub_kses($settings['techub_sub_title'])?></span>
-					<h4 class="tp-project-3-down-title"><a href="<?php echo esc_url($settings['techub_url'])?>"><?php echo techub_kses($settings['techub_title'])?></a></h4>
+		<div class="swiper tp-faq-slide pb-30 fix">
+			<div class="swiper-wrapper">
+			<?php foreach( $settings['item_list'] as $item ) : ?>
+				<div class="swiper-slide">
+					<div class="tp-faq-5-left-item text-center">
+						<div class="tp-faq-5-left-icon">
+							<img src="<?php echo esc_url($item['techub_image']['url']);?>" alt="">
+						</div>
+						<h4 class="tp-faq-5-left-title"><?php echo esc_html($item['techub_title']);?></h4>
+					</div>
 				</div>
+			 <?php endforeach;?>
 			</div>
+			<div class="tp-faq-5-pagenation"></div>
 		</div>
-		
-		<?php else: ?>
 
-		<div class="tp-project-5-wrapper wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-			<div class="tp-project-5-thumb m-0 p-relative">
-				<img src="<?php echo esc_url($settings['techub_image']['url'])?>" alt="">
-				<div class="tp-project-5-icon">
-					<a class="popup-image" href="<?php echo esc_url($settings['techub_image']['url'])?>"><i class="fa-thin fa-plus"></i></a>
-				</div>
-				<div class="tp-project-5-content text-center">
-					<span><?php echo techub_kses($settings['techub_sub_title'])?></span>
-					<h4 class="tp-project-5-title"><a href="<?php echo esc_url($settings['techub_url'])?>"><?php echo techub_kses($settings['techub_title'])?></a></h4>
-				</div>
-			</div>
-		</div>
-		
-		<?php endif; ?>
 
 		<?php
 	}
@@ -297,4 +250,4 @@ class Techub_Card extends Widget_Base {
 }
 
 
-$widgets_manager->register( new Techub_Card() );
+$widgets_manager->register( new Techub_Feature_List() );
