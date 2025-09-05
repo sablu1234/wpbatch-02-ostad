@@ -114,6 +114,94 @@ class Techub_Blog_Post extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'post_per_page',
+			[
+				'label' => esc_html__( 'Post Prt Page', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'default' => 3,
+			]
+		);
+
+		$this->add_control(
+			'post_cat_list',
+			[
+				'label' => esc_html__( 'Category Include', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+				'options' => post_cat(),
+				'label_block' => true,
+				'multiple' => true,
+			]
+		);
+
+		$this->add_control(
+			'post_cat_exclude',
+			[
+				'label' => esc_html__( 'Category Exclude', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+				'options' => post_cat(),
+				'label_block' => true,
+				'multiple' => true,
+			]
+		);
+
+		$this->add_control(
+			'post_in',
+			[
+				'label' => esc_html__( 'Post Include', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+				'options' => get_all_post(),
+				'label_block' => true,
+				'multiple' => true,
+			]
+		);
+
+		$this->add_control(
+			'post_not_in',
+			[
+				'label' => esc_html__( 'Post Exclude', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+				'options' => get_all_post(),
+				'label_block' => true,
+				'multiple' => true,
+			]
+		);
+
+		$this->add_control(
+			'post_order',
+			[
+				'label' => esc_html__( 'Order', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'asc',
+				'options' => [
+					'asc' => esc_html__( 'ASC', 'textdomain' ),
+					'desc' => esc_html__( 'DESC', 'textdomain' ),
+				],
+				
+			]
+		);
+
+		$this->add_control(
+			'post_orderby',
+			[
+				'label' => esc_html__( 'Order by', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'date',
+				'options' => [
+					'ID' => 'Post ID',
+					'author' => 'Post Author',
+					'title' => 'Title',
+					'date' => 'Date',
+					'modified' => 'Last Modified Date',
+					'parent' => 'Parent Id',
+					'rand' => 'Random',
+					'comment_count' => 'Comment Count',
+					'menu_order' => 'Menu Order',
+				],
+				
+			]
+		);
+
 		$this->end_controls_section();
 
 
@@ -191,17 +279,42 @@ class Techub_Blog_Post extends Widget_Base {
 
 		$args = array(
 			'post_type' => 'post',
-			'posts_per_page' => -1,
-			// 'orderby' => 'title menu_order',
-			'order' => 'ASC',
-			'tax_query'        => array(
-				array(
-					'taxonomy' => 'category', // Must be registered on BOTH sites.
-					'field'    => 'slug',
-					'terms'    => 'wp', // The terms are not needed on the subsite.
-				),
-			),
+			'posts_per_page' => $settings['post_per_page'],
+			'orderby' => $settings['post_orderby'],
+			'order' => $settings['post_order'],
+			'post__in' => $settings['post_in'],
+			'post__not_in' => $settings['post_not_in'],
 		);
+
+		if(!empty($settings['post_cat_list'] ) and !empty($settings['post_cat_exclude'] ) ){
+			$args['tax_query'] = array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'category',
+					'field' => 'slug',
+					'terms' => $settings['post_cat_list'],
+					'operator' => 'IN',
+				),
+				array(
+					'taxonomy' => 'category',
+					'field' => 'slug',
+					'terms' => $settings['post_cat_exclude'],
+					'operator' => 'NOT IN',
+				),
+			);
+		}
+		elseif(!empty($settings['post_cat_list'] ) || !empty($settings['post_cat_exclude'] )){
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'category',
+					'field' => 'slug',
+					'terms' => $settings['post_cat_exclude'] ? $settings['post_cat_exclude'] : $settings['post_cat_list'],
+					'operator' => $settings['post_cat_exclude'] ? 'IN' : 'NOT IN',
+				),
+			);
+		}
+
+
 		$query = new \WP_Query( $args );
 		
 		?>
