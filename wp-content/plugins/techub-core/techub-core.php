@@ -26,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 
 include_once('include/core-function.php');
+include_once('include/portfolio-post.php');
 
 
 final class Techub_Core {
