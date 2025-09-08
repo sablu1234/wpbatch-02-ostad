@@ -27,3 +27,16 @@
         }
         return $posts_list;
     }
+
+    function techub_get_cat_data($categories = [], $delimeter = ' ',$term = 'slug'){
+        $slugs = [];
+        foreach($categories as $cat){
+            if($term == 'slug'){
+                array_push($slugs, $cat->slug);
+            }
+            if($term == 'name'){
+                $slugs[] = $cat->name;
+            }
+        }
+        return implode($delimeter, $slugs);
+    }

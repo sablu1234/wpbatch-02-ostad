@@ -23,3 +23,21 @@ ul.postbox__comment.mb-95 {
 .comment .children {
     margin-left: 50p !important;
 }
+
+.portfolio-filter-button{
+    margin-bottom: 40px;
+}
+
+.portfolio-filter-button.d-flex button {
+    margin-right: 10px;
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+}
+
+.portfolio-filter-button.d-flex button.active {
+    margin-right: 10px;
+    background: #f00;
+    color: #fff;
+    padding: 6px 12px;
+}

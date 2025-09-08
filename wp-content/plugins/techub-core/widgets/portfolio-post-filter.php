@@ -128,7 +128,7 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 			[
 				'label' => esc_html__( 'Category Include', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::SELECT2,
-				'options' => post_cat(),
+				'options' => post_cat('portfolio-cat'),
 				'label_block' => true,
 				'multiple' => true,
 			]
@@ -139,7 +139,7 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 			[
 				'label' => esc_html__( 'Category Exclude', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::SELECT2,
-				'options' => post_cat(),
+				'options' => post_cat('portfolio-cat'),
 				'label_block' => true,
 				'multiple' => true,
 			]
@@ -278,7 +278,7 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 
 
 		$args = array(
-			'post_type' => 'post',
+			'post_type' => 'portfolio',
 			'posts_per_page' => $settings['post_per_page'],
 			'orderby' => $settings['post_orderby'],
 			'order' => $settings['post_order'],
@@ -286,30 +286,14 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 			'post__not_in' => $settings['post_not_in'],
 		);
 
-		if(!empty($settings['post_cat_list'] ) and !empty($settings['post_cat_exclude'] ) ){
-			$args['tax_query'] = array(
-				'relation' => 'AND',
-				array(
-					'taxonomy' => 'category',
-					'field' => 'slug',
-					'terms' => $settings['post_cat_list'],
-					'operator' => 'IN',
-				),
-				array(
-					'taxonomy' => 'category',
-					'field' => 'slug',
-					'terms' => $settings['post_cat_exclude'],
-					'operator' => 'NOT IN',
-				),
-			);
-		}
-		elseif(!empty($settings['post_cat_list'] ) || !empty($settings['post_cat_exclude'] )){
+
+		if(!empty($settings['post_cat_list'] )){
 			$args['tax_query'] = array(
 				array(
-					'taxonomy' => 'category',
+					'taxonomy' => 'portfolio-cat',
 					'field' => 'slug',
 					'terms' => $settings['post_cat_exclude'] ? $settings['post_cat_exclude'] : $settings['post_cat_list'],
-					'operator' => $settings['post_cat_exclude'] ? 'IN' : 'NOT IN',
+					'operator' => $settings['post_cat_exclude'] ? 'NOT IN' : 'IN',
 				),
 			);
 		}
@@ -322,100 +306,26 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 
         <section class="tp-portfolio-area pt-120 pb-90">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-                            <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/project-3-img1.jpg" alt="">
-                                <div class="tp-project-3-down-content text-center">
-                                    <span>Solution</span>
-                                    <h4 class="tp-project-3-down-title"><a href="portfolio-details.html">Data visualization</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
-                            <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/project-3-img2.jpg" alt="">
-                                <div class="tp-project-3-down-content text-center">
-                                    <span>Solution</span>
-                                    <h4 class="tp-project-3-down-title"><a href="portfolio-details.html">Data Storytelling</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
-                            <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/project-3-img3.jpg" alt="">
-                                <div class="tp-project-3-down-content text-center">
-                                    <span>Solution</span>
-                                    <h4 class="tp-project-3-down-title"><a href="portfolio-details.html">Network Security</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-                            <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/project-3-img6.jpg" alt="">
-                                <div class="tp-project-3-down-content text-center">
-                                    <span>Solution</span>
-                                    <h4 class="tp-project-3-down-title"><a href="portfolio-details.html">Data Insightfully</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
-                            <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/project-3-img5.jpg" alt="">
-                                <div class="tp-project-3-down-content text-center">
-                                    <span>Solution</span>
-                                    <h4 class="tp-project-3-down-title"><a href="portfolio-details.html">IT Management</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
-                            <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/project-3-img1.jpg" alt="">
-                                <div class="tp-project-3-down-content text-center">
-                                    <span>Solution</span>
-                                    <h4 class="tp-project-3-down-title"><a href="portfolio-details.html">Network Security</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-
-        <section class="tp-blog-5-area pt-150 pb-105 d-none">
-            <div class="container">
-                <div class="row">
+				<div class="portfolio-filter-button masonary-menu d-flex">
+					<button class="active" data-filter="*">show all</button>
+					<?php foreach($settings['post_cat_list'] as $item ) : 
+						?>
+					<button data-filter=".<?php echo esc_html($item); ?>"><?php echo post_cat('portfolio-cat')[$item] ;?></button>
+					<?php endforeach; ?>
+					
+				</div>
+                <div class="row grid">
 				<?php if ( $query->have_posts() ) : while( $query->have_posts()  ) : $query->the_post(); 
-					$categories = get_the_category(get_the_ID());
-
-					// var_dump($categories);
+					$categories = get_the_terms(get_the_ID(),'portfolio-cat');
+					
 				?>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="tp-blog-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-                            <div class="tp-blog-thumb">
-                                <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-                            </div>
-                            <div class="tp-blog-content">
-                                <div class="tp-blog-date d-flex">
-                                    <p><?php echo esc_html($categories[0]->name); ?></p>
-                                    <span><?php echo get_the_date(); ?></span>
-                                </div>
-                                <div class="tp-blog-content-inner">
-                                    <h4 class="tp-blog-content-inner-heading"><a href="<?php the_permalink(); ?>"><?php the_title(); ?> </a></h4>
-                                    <a class="tp-blog-btn" href="<?php the_permalink(); ?>">Read More <span><i class="flaticon-right-arrow"></i></span></a>
+                    <div class="col-xl-4 col-lg-6 col-md-6 grid-item <?php echo techub_get_cat_data($categories,' ','slug'); ?>">
+                        <div class="tp-project-3-slide-wrapper mb-30 ">
+                            <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
+                                <?php the_post_thumbnail(); ?>
+                                <div class="tp-project-3-down-content text-center">
+                                    <span><?php echo techub_get_cat_data($categories,',','name'); ?></span>
+                                    <h4 class="tp-project-3-down-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                                 </div>
                             </div>
                         </div>
@@ -424,6 +334,8 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
                 </div>
             </div>
         </section>
+
+
 		<?php
 	}
 
