@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
-class Techub_Portfolio_Filter_Post extends Widget_Base {
+class Techub_Porfolio_Filter_Post extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -286,7 +286,6 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 			'post__not_in' => $settings['post_not_in'],
 		);
 
-
 		if(!empty($settings['post_cat_list'] )){
 			$args['tax_query'] = array(
 				array(
@@ -304,37 +303,36 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 		?>
 
 
+
         <section class="tp-portfolio-area pt-120 pb-90">
             <div class="container">
 				<div class="portfolio-filter-button masonary-menu d-flex">
-					<button class="active" data-filter="*">show all</button>
+					<button data-filter="*">show all</button>
 					<?php foreach($settings['post_cat_list'] as $item ) : 
+
 						?>
-					<button data-filter=".<?php echo esc_html($item); ?>"><?php echo post_cat('portfolio-cat')[$item] ;?></button>
+					<button data-filter=".<?php echo $item; ?>"><?php echo post_cat('portfolio-cat')[$item] ;?></button>
 					<?php endforeach; ?>
-					
 				</div>
                 <div class="row grid">
-				<?php if ( $query->have_posts() ) : while( $query->have_posts()  ) : $query->the_post(); 
+					<?php if ( $query->have_posts() ) : while( $query->have_posts()  ) : $query->the_post(); 
 					$categories = get_the_terms(get_the_ID(),'portfolio-cat');
-					
-				?>
+					?>
                     <div class="col-xl-4 col-lg-6 col-md-6 grid-item <?php echo techub_get_cat_data($categories,' ','slug'); ?>">
-                        <div class="tp-project-3-slide-wrapper mb-30 ">
+                        <div class="tp-project-3-slide-wrapper mb-30">
                             <div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
-                                <?php the_post_thumbnail(); ?>
+                               <?php the_post_thumbnail(); ?>
                                 <div class="tp-project-3-down-content text-center">
                                     <span><?php echo techub_get_cat_data($categories,',','name'); ?></span>
-                                    <h4 class="tp-project-3-down-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                                    <h4 class="tp-project-3-down-title"><a href="><?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-				<?php endwhile; endif; ?>
+					<?php endwhile; endif; ?>
                 </div>
             </div>
         </section>
-
 
 		<?php
 	}
@@ -343,4 +341,4 @@ class Techub_Portfolio_Filter_Post extends Widget_Base {
 }
 
 
-$widgets_manager->register( new Techub_Portfolio_Filter_Post() );
+$widgets_manager->register( new Techub_Porfolio_Filter_Post() );
