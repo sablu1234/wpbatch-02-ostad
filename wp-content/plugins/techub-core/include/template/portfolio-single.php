@@ -1,10 +1,10 @@
-<?php get_header(); ?>
+<?php get_header(); ?>+
 
-<div class="container">
-    <h2><?php the_title(); ?></h2>
-<p><?php the_content() ; ?></p>
-<?php the_post_thumbnail(  ); ?>
 
-</div>
+    <section class="tp-portfolio-details-area pt-120 pb-100">
+        <?php the_content(); ?>
+    </section>
+
+
 
 <?php get_footer(); ?>
