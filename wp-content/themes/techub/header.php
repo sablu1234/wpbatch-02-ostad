@@ -12,10 +12,9 @@
 
 <body <?php body_class();?> >
 
-<?php echo get_template_part('template-parts/header/header-1'); ?>
+<?php do_action('techub_header_before');
 
 
-<?php
+// do_action('my_action');
 
-
-do_action('techub_header_before');
+// echo apply_filters('my_filter','this is text','hello');

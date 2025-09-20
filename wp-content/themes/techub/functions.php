@@ -117,3 +117,31 @@ if ( class_exists( 'Kirki' ) ) {
 
 
 
+// action hooks
+function hy_fun(){
+	echo '<h2> Heading 01 </h2>';
+}
+add_action('my_action','hy_fun',2);
+
+function hy_fun_2(){
+	echo '<h2> Heading 02</h2>';
+}
+add_action('my_action','hy_fun_2',1);
+
+function hy_fun_3(){
+	echo '<h2> Heading 03 </h2>';
+}
+add_action('my_action','hy_fun_3',3);
+
+remove_action('my_action','hy_fun_3',3);
+remove_action('my_action','hy_fun_2',1);
+
+// filters hooks
+function my_custom_data($m,$m2){
+	echo strtoupper($m= '<h1>Hello new text</h1>');
+	echo ucwords($m2= '<h1>Hello new text 2</h1>');
+	return;
+}
+add_filter('my_filter','my_custom_data',10,2);
+
+remove_filter('my_filter','my_custom_data',10,2);

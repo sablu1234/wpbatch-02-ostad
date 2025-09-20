@@ -1,6 +1,14 @@
 <?php
 
 
+
+function techub_header(){
+   echo get_template_part('template-parts/header/header-1');
+}
+add_action( 'techub_header_before' , 'techub_header' );
+
+
+
 function techub_header_logo(){
     $header_logo = get_theme_mod('header_logo', get_template_directory_uri().'/assets/img/logo/logo.png');
     ?>

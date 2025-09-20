@@ -1,0 +1,43 @@
+/*
+Theme Name: Harry Shop
+Author: Theme_Pure
+Author URI: https://themeforest.net/item/techub-it-solutions-technology-psd-template/51084120
+Description: Techub is a Modern & Professional wordpress theme which is perfectly suitable for the Agency, Marketing, Consulting, start-up, IT Solutions, and Services Company related any business website
+Version: 1.0.0
+Text Domain: harry-shop
+License: GNU General Public License v3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+*/
+
+
+.rc__post-thumb img {
+    object-fit: contain;
+    width: 72px;
+    height: 72px;
+}
+
+ul.postbox__comment.mb-95 {
+    list-style: none;
+}
+
+.comment .children {
+    margin-left: 50p !important;
+}
+
+.portfolio-filter-button{
+    margin-bottom: 40px;
+}
+
+.portfolio-filter-button.d-flex button {
+    margin-right: 10px;
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+}
+
+.portfolio-filter-button.d-flex button.active {
+    margin-right: 10px;
+    background: #f00;
+    color: #fff;
+    padding: 6px 12px;
+}
