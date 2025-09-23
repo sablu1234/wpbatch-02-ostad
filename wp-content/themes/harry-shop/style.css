@@ -41,3 +41,27 @@ ul.postbox__comment.mb-95 {
     color: #fff;
     padding: 6px 12px;
 }
+img {
+    height: auto;
+}
+.price ins{
+    text-decoration: none;
+}
+
+a.product-add-cart-btn.added {
+    display: none;
+}
+.added_to_cart{
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--tp-common-white);
+    background-color: var(--tp-common-black);
+    display: inline-block;
+    padding: 7px 25px;
+    text-align: center;
+    display: block;
+}
+.added_to_cart:hover{
+    color: var(--tp-common-white);
+    background-color: var(--tp-theme-1);
+}
