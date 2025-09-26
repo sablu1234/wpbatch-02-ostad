@@ -65,3 +65,7 @@ a.product-add-cart-btn.added {
     color: var(--tp-common-white);
     background-color: var(--tp-theme-1);
 }
+
+.woosc-area {
+    background: transparent !important;
+}
