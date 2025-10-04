@@ -27,6 +27,9 @@ function techub_theme_support(){
     remove_theme_support( 'widgets-block-editor' );
 	add_theme_support('woocommerce');
 
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
+
 	// Remove woocommerce defauly styles
 	add_filter('woocommerce_enqueue_styles','__return_false');
 
