@@ -25,19 +25,22 @@ if ( ! is_a( $product, 'WC_Product' ) ) {
 }
 
 ?>
-<li>
-	<?php do_action( 'woocommerce_widget_product_item_start', $args ); ?>
+<li class="test">
 
-	<a href="<?php echo esc_url( $product->get_permalink() ); ?>">
-		<?php echo $product->get_image(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<span class="product-title"><?php echo wp_kses_post( $product->get_name() ); ?></span>
-	</a>
+	<div class="rc__post d-flex align-items-center">
+	<div class="rc__post-thumb">
+		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+	</div>
+	<div class="rc__post-content">
+		<h3 class="rc__post-title">
+			<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+		</h3>
+		<div class="rc__meta">
+			<span>
+				<?php echo $product->get_price_html(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			</span>
+		</div>
+	</div>
+</div>
 
-	<?php if ( ! empty( $show_rating ) ) : ?>
-		<?php echo wc_get_rating_html( $product->get_average_rating() ); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php endif; ?>
-
-	<?php echo $product->get_price_html(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-
-	<?php do_action( 'woocommerce_widget_product_item_end', $args ); ?>
 </li>

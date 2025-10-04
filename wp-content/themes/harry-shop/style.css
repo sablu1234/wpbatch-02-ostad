@@ -69,3 +69,105 @@ a.product-add-cart-btn.added {
 .woosc-area {
     background: transparent !important;
 }
+
+/* woo rating */
+.star-rating{
+	position: relative;
+	display: inline-block;
+}
+.star-rating span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	font-size: 0px;
+	display: flex;
+}
+.star-rating::before {
+	font-family: "Font Awesome 6 Pro";
+	content: "\f005\f005\f005\f005\f005";
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	color: var(--tp-common-yellow-5);
+	font-weight: 300;
+	font-size: 11px;
+}
+.star-rating span::before {
+	font-family: "Font Awesome 6 Pro";
+	content: "\f005\f005\f005\f005\f005";
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	color: var(--tp-common-yellow-5);
+	font-weight: 900;
+	display: inline-block;
+	font-size: 11px;
+}   
+
+/* filter */
+.woocommerce .widget_price_filter .ui-slider-horizontal {
+    height: .5em;
+}
+
+.woocommerce .widget_price_filter .ui-slider {
+    position: relative;
+    text-align: left;
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
+.price_slider_amount {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.woocommerce .widget_price_filter .ui-slider .ui-slider-range {
+    position: absolute;
+    z-index: 1;
+    font-size: .7em;
+    display: block;
+    border: 0;
+    border-radius: 1em;
+    background-color: #7f54b3;
+}
+
+.woocommerce .widget_price_filter .ui-slider-horizontal .ui-slider-range {
+    top: 0;
+    height: 100%;
+}
+
+.woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content {
+    border-radius: 1em;
+    background-color: #35224c;
+    border: 0;
+}
+
+.woocommerce .widget_price_filter .ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 1em;
+    height: 1em;
+    background-color: #7f54b3;
+    border-radius: 1em;
+    cursor: ew-resize;
+    outline: 0;
+    top: -.3em;
+    margin-left: -.5em;
+}
+
+.price_slider_amount button.button {
+    background: #000;
+    color: #fff;
+    padding: 4px 13px;
+}
+
+.woocommerce-product-rating {
+    display: flex;
+}
+
+.product__details-rating-count {
+    position: relative;
+    margin-bottom: 2px;
+    padding-left: 9px;
+    margin-left: 4px;
+}

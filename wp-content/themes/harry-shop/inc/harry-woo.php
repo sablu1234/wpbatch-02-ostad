@@ -1,5 +1,4 @@
 <?php
-
 // archive products hooks remove or add
 remove_action('woocommerce_before_main_content','woocommerce_breadcrumb',20);
 remove_action('woocommerce_shop_loop_header','woocommerce_product_taxonomy_archive_header',10);
@@ -17,6 +16,16 @@ remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loo
 remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price',10);
 remove_action('woocommerce_after_shop_loop_item','woocommerce_template_loop_product_link_close',5);
 remove_action('woocommerce_after_shop_loop_item','woocommerce_template_loop_add_to_cart',10);
+
+// details
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_title',5);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_rating',10);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_price',10);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_excerpt',10);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_add_to_cart',30);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_sharing',50);
+
 
 add_filter( 'woosw_button_position_archive', '__return_false' );
 add_filter( 'woosw_button_position_single', '__return_false' );
@@ -140,21 +149,7 @@ function harry_product_grid(){
         </div>
         <div class="product__content">
             <div class="product__rating d-flex">
-            <span>
-                <i class="icon_star"></i>
-            </span>
-            <span>
-                <i class="icon_star"></i>
-            </span>
-            <span>
-                <i class="icon_star"></i>
-            </span>
-            <span>
-                <i class="icon_star"></i>
-            </span>
-            <span>
-                <i class="icon_star_alt"></i>
-            </span>
+            <?php echo woocommerce_template_loop_rating(); ?>
             </div>
             <h3 class="product__title">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
@@ -168,3 +163,93 @@ function harry_product_grid(){
 <?php
 }
 add_action('woocommerce_before_shop_loop_item','harry_product_grid');
+
+
+// harry details product content
+
+function harry_details_content(){
+   global $post; 
+   global $product; 
+   global $woocommerce; 
+
+   $stock_status = $product->get_stock_status();
+   $stock_quantity = $product->get_stock_quantity();
+
+
+//    echo '<pre>';
+//    var_dump($product);
+    
+?>
+    <div class="product__details-wrapper">
+
+        <div class="product__details-stock">
+            <span><?php echo $stock_quantity;?> <?php echo $stock_status;?> </span>
+        </div>
+        <h3 class="product__details-title"><?php the_title(); ?></h3>
+
+        <div class="product__details-rating d-flex align-items-center">
+            <?php woocommerce_template_single_rating(); ?>
+        </div>
+
+        <?php woocommerce_template_single_excerpt(); ?>
+
+        <div class="product__details-price">
+            <?php woocommerce_template_single_price(); ?>
+            <span class="product__details-offer">-12%</span>
+        </div>
+
+       
+
+        <div class="product__details-action d-flex flex-wrap align-items-center">
+        <?php woocommerce_template_single_add_to_cart(); ?>
+            <button type="button" class="product-action-btn">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.60361 7.98635C2.83627 11.8048 7.70625 14.8923 9.00046 15.6565C10.2991 14.8844 15.2042 11.7628 16.3973 7.98985C17.1807 5.55102 16.4536 2.46177 13.5645 1.53473C12.1648 1.08741 10.5321 1.35966 9.4049 2.22804C9.16927 2.40837 8.8422 2.41187 8.60481 2.23329C7.41084 1.33952 5.85111 1.07778 4.42941 1.53473C1.5447 2.4609 0.82023 5.55014 1.60361 7.98635ZM9.00138 17.0711C8.89236 17.0711 8.78421 17.0448 8.68574 16.9914C8.41055 16.8417 1.92808 13.2841 0.348132 8.3872C0.347252 8.3872 0.347252 8.38633 0.347252 8.38633C-0.644504 5.30321 0.459792 1.42874 4.02502 0.284605C5.69904 -0.254635 7.52342 -0.0174044 8.99874 0.909632C10.4283 0.00973263 12.3275 -0.238878 13.9681 0.284605C17.5368 1.43049 18.6446 5.30408 17.6538 8.38633C16.1248 13.2272 9.59485 16.8382 9.3179 16.9896C9.21943 17.0439 9.1104 17.0711 9.00138 17.0711Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2027 6.67485C13.8625 6.67485 13.5741 6.41486 13.546 6.07171C13.4879 5.35214 13.0044 4.74462 12.3159 4.52315C11.9686 4.4111 11.7787 4.04081 11.8904 3.69678C12.0038 3.35188 12.3722 3.16454 12.7204 3.27309C13.9187 3.65914 14.7584 4.71573 14.8613 5.96491C14.8903 6.32645 14.6204 6.64334 14.2572 6.67222C14.2388 6.67398 14.2212 6.67485 14.2027 6.67485Z" fill="currentColor"/>
+                </svg>                                       
+                <span class="product-action-tooltip">Add To Wishlist</span>
+            </button>
+            <button type="button" class="product-action-btn">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.4144 6.16828L14 3.58412L11.4144 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1.48883 3.58386L14 3.58386" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4.07452 8.32166L1.4889 10.9058L4.07452 13.4899" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 10.906H1.48883" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                                       
+                <span class="product-action-tooltip">Add To Compare</span>
+            </button>
+        </div>
+        <div class="product__details-sku product__details-more">
+            <p>SKU:</p>
+            <span>29045-SB-8</span>
+        </div>
+        <div class="product__details-categories product__details-more">
+            <p>Categories:</p>
+            <span>
+                <a href="#">iPhone Cases,</a>
+            </span> 
+            <span>
+                <a href="#">Android Cases,</a>
+            </span> 
+            <span>
+                <a href="#">Accessories</a>
+            </span>
+        </div>
+        <div class="product__details-tags">
+            <span>Tags:</span>
+            <a href="#">iPhone</a>
+            <a href="#">Laptop</a>
+            <a href="#">Headphone</a>
+        </div>
+        <div class="product__details-share">
+            <span>Share:</span>
+
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+<?php
+}
+add_action('woocommerce_single_product_summary','harry_details_content');

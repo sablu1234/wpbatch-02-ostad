@@ -30,3 +30,5 @@ __( 'Submit', 'elementor' );
 __( 'Preview Changes', 'elementor' );
 /* translators: %s: Post type label. */
 __( '%s Settings', 'elementor' );
+__( 'My Elementor', 'elementor' );
+__( 'Connect my account', 'elementor' );
