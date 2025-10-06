@@ -218,7 +218,7 @@
 
 	////////////////////////////////////////////////////
 	// 07. Nice Select Js
-	$('select').niceSelect();
+	// $('select').niceSelect();
 
 
 	var tp_rtl = localStorage.getItem('tp_dir');
@@ -2403,6 +2403,13 @@
 		}
 		tp_tab_line_2();
 	}
+
+	$('.related_slider_active').slick({
+	slidesToShow: 3,
+	slidesToScroll: 1,
+	autoplay: true,
+	autoplaySpeed: 2000,
+	});
 
 
 })(jQuery);

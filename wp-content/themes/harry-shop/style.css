@@ -212,3 +212,100 @@ ol.flex-control-nav.flex-control-thumbs {
 ol.flex-control-nav.flex-control-thumbs li img {
     width: 100%;
 }
+
+.product__details-tab-nav-inner .active a{
+border-bottom: 2px solid var(--tp-theme-1);
+}
+
+.woocommerce-Reviews .commentlist {
+    list-style: none;
+    padding: 0;
+}
+
+.woocommerce-Reviews img {
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+    border-radius: 100px;
+}
+
+/* details rating */
+
+.woocommerce p.stars a {
+    position: relative;
+    height: 1em;
+    width: 1em;
+    text-indent: -999em;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.woocommerce p.stars a::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    font-family: "Font Awesome 6 Pro";
+    content: "\f005";
+    font-weight: 300;
+    text-indent: 0;
+}
+
+.woocommerce p.stars.selected a.active::before {
+    content: "\f005";
+    font-weight: 900;
+}
+
+.woocommerce p.stars.selected a:not(.active)::before {
+    content: "\f005";
+    font-weight: 900;
+}
+.woocommerce p.stars.selected a.active~a::before {
+    content: "\f005";
+    font-weight: 300;
+}
+
+.woocommerce p.stars:hover a::before {
+    content: "\f005";
+    font-weight: 900;
+}
+
+.woocommerce p.stars a:hover~a::before {
+    content: "\f005";
+    font-weight: 300;
+    
+}
+
+#review_form .nice-select {
+    display: none;
+}
+
+.related_slider_active{
+    margin: 0 -10px;
+}
+
+.related_slider_active .col {
+    padding: 0 10px;
+}
+
+/* cart table */
+table.shop_table.shop_table_responsive.cart.woocommerce-cart-form__contents {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.shop_table tr{
+    border: 1px solid #ddd;
+}
+
+.shop_table tr td{
+    border: 1px solid #ddd;
+}
+
+table.shop_table.woocommerce-checkout-review-order-table {
+    width: 100%;
+}

@@ -64,9 +64,11 @@ function techub_breadcrumb(){
                 <div class="row">
                     <div class="tp-portfolio-breadcrumb-content text-center">
                         <h2 class="tp-portfolio-breadcrumb-title"><?php echo techub_kses($title); ?></h2>
+                        <?php if(function_exists('bcn_display')) : ?>
                         <p class="tp-portfolio-breadcrumb-body tp-blog-sideber-breadcrumb-body">
                             <?php bcn_display(); ?>
                     </p>
+                    <?php endif; ?>
                     </div>
                 </div>
             </div>

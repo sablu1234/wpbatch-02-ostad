@@ -35,6 +35,30 @@ add_filter( 'woosq_button_position', '__return_false' );
 add_filter( 'woosc_button_position_archive', '__return_false' );
 add_filter( 'woosc_button_position_single', '__return_false' );
 
+
+
+
+// harry_sale_percentage
+function harry_sale_percentage_badge(){
+    global $product;
+    $output = '';
+    $icon = esc_html__("-",'harry');
+ 
+    if ( $product->is_on_sale() && $product->is_type( 'variable' ) ) {
+       $percentage = ceil(100 - ($product->get_variation_sale_price() / $product->get_variation_regular_price( 'min' )) * 100);
+       $output .= '<div class="product-percentage-badges"><span class="tp-product-details-offer">'. $icon . $percentage.'%</span></div>';
+ 
+    } elseif( $product->is_on_sale() && $product->get_regular_price()  && !$product->is_type( 'grouped' )) {
+       $percentage = ceil(100 - ($product->get_sale_price() / $product->get_regular_price()) * 100);
+       $output .= '<div class="product-percentage-badges">';
+       $output .= '<span class="tp-product-details-offer">'.$icon . $percentage.'%</span>';
+       $output .= '</div>';
+    }
+    return $output;
+ }
+ 
+
+
 // harry add_to_cart button
 function harry_custom_add_to_cart( $args = array() ) {
     global $product;
@@ -195,7 +219,7 @@ function harry_details_content(){
 
         <div class="product__details-price">
             <?php woocommerce_template_single_price(); ?>
-            <span class="product__details-offer">-12%</span>
+            <span class="product__details-offer"><?php echo harry_sale_percentage_badge(); ?></span>
         </div>
 
        
