@@ -309,3 +309,36 @@ table.shop_table.shop_table_responsive.cart.woocommerce-cart-form__contents {
 table.shop_table.woocommerce-checkout-review-order-table {
     width: 100%;
 }
+
+p.woocommerce-mini-cart__total.total {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px;
+}
+
+.woocommerce-mini-cart__buttons{
+    margin: 0 20px;
+}
+
+.woocommerce-mini-cart__buttons .button.wc-forward {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--tp-common-white);
+    background-color: var(--tp-grey-1);
+    text-align: center;
+    font-family: var(--tp-ff-space);
+    padding: 10px 30px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    letter-spacing: -0.02em;
+    width: 100%;
+    color: #222;
+}
+
+.woocommerce-mini-cart__button .button.wc-forward.checkout{
+    border: 1px solid #ddd;
+    color: #222;
+    background: transparent;
+}

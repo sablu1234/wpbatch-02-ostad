@@ -20854,3 +20854,8 @@ label {
 }
 
 /*# sourceMappingURL=techub-core.css.map */
+
+/* wc wise list body backgorund solution */
+div#woosc-area {
+    background: transparent !important;
+}

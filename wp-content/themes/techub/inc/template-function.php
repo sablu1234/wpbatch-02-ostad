@@ -3,7 +3,24 @@
 
 
 function techub_header(){
-   echo get_template_part('template-parts/header/header-1');
+
+   $header_select_from_page = function_exists('get_field') ? get_field('header_select') : '';
+   $header_style_kirki = get_theme_mod('header_style_kirki', 'header_kirki_1');
+
+   if($header_select_from_page === 'header_2'){
+         echo get_template_part('template-parts/header/header-2');
+   }elseif($header_select_from_page === 'header_1'){
+         echo get_template_part('template-parts/header/header-1');
+   }else{
+      if($header_style_kirki === 'header_kirki_1'){
+         echo get_template_part('template-parts/header/header-1');
+      }
+      elseif($header_style_kirki === 'header_kirki_2'){
+         echo get_template_part('template-parts/header/header-2');
+      }
+   }
+
+
 }
 add_action( 'techub_header_before' , 'techub_header' );
 

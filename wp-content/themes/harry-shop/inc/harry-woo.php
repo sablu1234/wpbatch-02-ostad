@@ -38,6 +38,36 @@ add_filter( 'woosc_button_position_single', '__return_false' );
 
 
 
+// mini cart display 
+// woocommerce mini cart content
+add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
+    ob_start();
+    ?>
+    <div class="mini_shopping_cart_box">
+        <?php woocommerce_mini_cart(); ?>
+    </div>
+    <?php $fragments['.mini_shopping_cart_box'] = ob_get_clean();
+    return $fragments;
+});
+
+// woocommerce mini cart count icon
+if ( ! function_exists( 'shofy_header_add_to_cart_fragment' ) ) {
+    function harry_header_add_to_cart_fragment( $fragments ) {
+        ob_start();
+        ?>
+        <span class="tp-item-count tp-cart__count" id="tp-cart-item">
+            <?php echo esc_html( WC()->cart->cart_contents_count ); ?>
+        </span>
+        <?php
+        $fragments['#tp-cart-item'] = ob_get_clean();
+
+        return $fragments;
+    }
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'harry_header_add_to_cart_fragment' );
+
+
+
 // harry_sale_percentage
 function harry_sale_percentage_badge(){
     global $product;
@@ -222,8 +252,6 @@ function harry_details_content(){
             <span class="product__details-offer"><?php echo harry_sale_percentage_badge(); ?></span>
         </div>
 
-       
-
         <div class="product__details-action d-flex flex-wrap align-items-end">
         <?php woocommerce_template_single_add_to_cart(); ?>
 
@@ -271,3 +299,56 @@ function harry_social_share(){?>
     <?php
     
 }
+
+// custom_quantity_fields_script 
+function custom_quantity_fields_script(){
+    ?>
+    <script type='text/javascript'>
+    jQuery( function( $ ) {
+        if ( ! String.prototype.getDecimals ) {
+            String.prototype.getDecimals = function() {
+                var num = this,
+                    match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+                if ( ! match ) {
+                    return 0;
+                }
+                return Math.max( 0, ( match[1] ? match[1].length : 0 ) - ( match[2] ? +match[2] : 0 ) );
+            }
+        }
+        // Quantity "plus" and "minus" buttons
+        $( document.body ).on( 'click', '.plus, .minus', function() {
+            var $qty        = $( this ).closest( '.quantity' ).find( '.qty'),
+                currentVal  = parseFloat( $qty.val() ),
+                max         = parseFloat( $qty.attr( 'max' ) ),
+                min         = parseFloat( $qty.attr( 'min' ) ),
+                step        = $qty.attr( 'step' );
+
+            // Format values
+            if ( ! currentVal || currentVal === '' || currentVal === 'NaN' ) currentVal = 0;
+            if ( max === '' || max === 'NaN' ) max = '';
+            if ( min === '' || min === 'NaN' ) min = 0;
+            if ( step === 'any' || step === '' || step === undefined || parseFloat( step ) === 'NaN' ) step = 1;
+
+            // Change the value
+            if ( $( this ).is( '.plus' ) ) {
+                if ( max && ( currentVal >= max ) ) {
+                    $qty.val( max );
+                } else {
+                    $qty.val( ( currentVal + parseFloat( step )).toFixed( step.getDecimals() ) );
+                }
+            } else {
+                if ( min && ( currentVal <= min ) ) {
+                    $qty.val( min );
+                } else if ( currentVal > 0 ) {
+                    $qty.val( ( currentVal - parseFloat( step )).toFixed( step.getDecimals() ) );
+                }
+            }
+
+            // Trigger change event
+            $qty.trigger( 'change' );
+        });
+    });
+    </script>
+    <?php
+}
+add_action( 'wp_footer' , 'custom_quantity_fields_script' );
