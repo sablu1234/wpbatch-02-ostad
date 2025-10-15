@@ -5,7 +5,7 @@
  * Description: All-in-One WP Migration makes moving your entire WordPress site simple. Export or import your database, media, plugins, and themes with just a few clicks.
  * Author: ServMask
  * Author URI: https://servmask.com/
- * Version: 7.94
+ * Version: 7.100
  * Text Domain: all-in-one-wp-migration
  * Domain Path: /languages
  * Network: True
@@ -46,10 +46,10 @@ if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && ( $_SERVER['HTTP_X_FORWARDED
 }
 
 // Plugin basename
-define( 'AI1WM_PLUGIN_BASENAME', basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ) );
+define( 'AI1WM_PLUGIN_BASENAME', basename( __DIR__ ) . '/' . basename( __FILE__ ) );
 
 // Plugin path
-define( 'AI1WM_PATH', dirname( __FILE__ ) );
+define( 'AI1WM_PATH', __DIR__ );
 
 // Plugin URL
 define( 'AI1WM_URL', plugins_url( '', AI1WM_PLUGIN_BASENAME ) );
@@ -58,19 +58,19 @@ define( 'AI1WM_URL', plugins_url( '', AI1WM_PLUGIN_BASENAME ) );
 define( 'AI1WM_STORAGE_URL', plugins_url( 'storage', AI1WM_PLUGIN_BASENAME ) );
 
 // Include constants
-require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'constants.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'constants.php';
 
 // Include deprecated
-require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'deprecated.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'deprecated.php';
 
 // Include functions
-require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'functions.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 
 // Include exceptions
-require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'exceptions.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'exceptions.php';
 
 // Include loader
-require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'loader.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'loader.php';
 
 // Plugin initialization
 $main_controller = new Ai1wm_Main_Controller();

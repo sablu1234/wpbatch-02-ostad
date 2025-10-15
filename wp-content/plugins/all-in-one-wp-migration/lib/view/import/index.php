@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						<?php do_action( 'ai1wm_import_left_options' ); ?>
 
-						<?php include AI1WM_TEMPLATES_PATH . '/import/import-buttons.php'; ?>
+						<?php require_once AI1WM_TEMPLATES_PATH . '/import/import-buttons.php'; ?>
 
 						<input type="hidden" name="ai1wm_manual_import" value="1" />
 
@@ -55,13 +55,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php else : ?>
 
-					<?php include AI1WM_TEMPLATES_PATH . '/import/import-permissions.php'; ?>
+					<?php require_once AI1WM_TEMPLATES_PATH . '/import/import-permissions.php'; ?>
 
 				<?php endif; ?>
 			</div>
 		</div>
 
-		<?php include AI1WM_TEMPLATES_PATH . '/common/sidebar-right.php'; ?>
+		<?php require_once AI1WM_TEMPLATES_PATH . '/common/sidebar-right.php'; ?>
 
 	</div>
 </div>

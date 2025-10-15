@@ -1542,6 +1542,29 @@ function ai1wm_open( $file, $mode ) {
 }
 
 /**
+ * Opens a gzipped file in specified mode
+ *
+ * @param  string   $file Path to the file to open
+ * @param  string   $mode Mode in which to open the file
+ * @return resource
+ * @throws Ai1wm_Not_Accessible_Exception
+ */
+function ai1wm_gzopen( $file, $mode ) {
+	$file_handle = @fopen( "compress.zlib://{$file}", $mode );
+	if ( false === $file_handle ) {
+		throw new Ai1wm_Not_Accessible_Exception(
+			wp_kses(
+				/* translators: 1: File path, 2: mode */
+				sprintf( __( 'Could not open %1$s with mode %2$s. The process cannot continue. <a href="https://help.servmask.com/knowledgebase/invalid-file-permissions/" target="_blank">Technical details</a>', 'all-in-one-wp-migration' ), $file, $mode ),
+				ai1wm_allowed_html_tags()
+			)
+		);
+	}
+
+	return $file_handle;
+}
+
+/**
  * Write contents to a file
  *
  * @param  resource $handle  File handle to write to
@@ -1670,6 +1693,7 @@ function ai1wm_tell( $handle ) {
  */
 function ai1wm_putcsv( $handle, $fields, $separator = ',', $enclosure = '"', $escape = '\\' ) {
 	if ( PHP_MAJOR_VERSION >= 7 ) {
+		// phpcs:ignore PHPCompatibility.FunctionUse.NewFunctionParameters
 		$write_result = @fputcsv( $handle, $fields, $separator, $enclosure, $escape );
 	} else {
 		$write_result = @fputcsv( $handle, $fields, $separator, $enclosure );
@@ -1750,18 +1774,45 @@ function ai1wm_chmod( $file, $mode ) {
 /**
  * Copies one file's contents to another
  *
- * @param  string $source_file      File to copy the contents from
- * @param  string $destination_file File to copy the contents to
+ * @param  string  $target_file        File to copy the contents from
+ * @param  string  $output_file        File to copy the contents to
+ * @param  integer $output_file_offset Output file offset bytes
+ * @return void
  */
-function ai1wm_copy( $source_file, $destination_file ) {
-	$source_handle      = ai1wm_open( $source_file, 'rb' );
-	$destination_handle = ai1wm_open( $destination_file, 'ab' );
-	while ( $buffer = ai1wm_read( $source_handle, 4096 ) ) {
-		ai1wm_write( $destination_handle, $buffer );
+function ai1wm_copy( $target_file, $output_file, $output_file_offset = 0 ) {
+	$target_handle = ai1wm_open( $target_file, 'rb' );
+	$output_handle = ai1wm_open( $output_file, 'cb' );
+	if ( ai1wm_seek( $output_handle, $output_file_offset, SEEK_SET ) !== -1 ) {
+		while ( ( $file_buffer = ai1wm_read( $target_handle, 4096 ) ) ) {
+			ai1wm_write( $output_handle, $file_buffer );
+		}
 	}
-	ai1wm_close( $source_handle );
-	ai1wm_close( $destination_handle );
+
+	ai1wm_close( $target_handle );
+	ai1wm_close( $output_handle );
 }
+
+/**
+ * Copies gzipped file's contents while uncompressing to another
+ *
+ * @param  string  $target_file        File to copy the contents from
+ * @param  string  $output_file        File to copy the contents to
+ * @param  integer $output_file_offset Output file offset bytes
+ * @return void
+ */
+function ai1wm_copy_gz( $target_file, $output_file, $output_file_offset = 0 ) {
+	$target_handle = ai1wm_gzopen( $target_file, 'rb' );
+	$output_handle = ai1wm_open( $output_file, 'cb' );
+	if ( ai1wm_seek( $output_handle, $output_file_offset, SEEK_SET ) !== -1 ) {
+		while ( ( $file_buffer = ai1wm_read( $target_handle, 4096 ) ) ) {
+			ai1wm_write( $output_handle, $file_buffer );
+		}
+	}
+
+	ai1wm_close( $target_handle );
+	ai1wm_close( $output_handle );
+}
+
 
 /**
  * Check whether file size is supported by current PHP version
@@ -1775,7 +1826,7 @@ function ai1wm_is_filesize_supported( $file, $php_int_size = PHP_INT_SIZE, $php_
 
 	// Check whether file size is less than 2GB in PHP 32bits
 	if ( $php_int_size === 4 ) {
-		if ( ( $file_handle = @fopen( $file, 'r' ) ) ) {
+		if ( ( $file_handle = @fopen( $file, 'rb' ) ) ) {
 			if ( @fseek( $file_handle, $php_int_max, SEEK_SET ) !== -1 ) {
 				if ( @fgetc( $file_handle ) !== false ) {
 					$size_result = false;
@@ -1799,6 +1850,50 @@ function ai1wm_is_filesize_supported( $file, $php_int_size = PHP_INT_SIZE, $php_
 function ai1wm_is_filename_supported( $file, $extensions = array( 'wpress' ) ) {
 	if ( in_array( pathinfo( $file, PATHINFO_EXTENSION ), $extensions ) ) {
 		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Check whether file data is supported by All-in-One WP Migration
+ *
+ * @param  string  $file Path to file
+ * @return boolean
+ */
+function ai1wm_is_filedata_supported( $file ) {
+	if ( ( $file_handle = @fopen( $file, 'rb' ) ) ) {
+		if ( ( $file_buffer = @fread( $file_handle, 4377 ) ) ) {
+			if ( ( $file_data = @unpack( 'a255filename/a14size/a12mtime/a4096path', $file_buffer ) ) !== false ) {
+				if ( AI1WM_PACKAGE_NAME === trim( $file_data['filename'] ) ) {
+					return true;
+				}
+			}
+		}
+
+		@fclose( $file_handle );
+	}
+
+	return false;
+}
+
+/**
+ * Check whether gzipped file data is supported by All-in-One WP Migration
+ *
+ * @param  string  $file Path to file
+ * @return boolean
+ */
+function ai1wm_is_gzipped_filedata_supported( $file ) {
+	if ( ( $file_handle = @gzopen( $file, 'rb' ) ) ) {
+		if ( ( $file_buffer = @gzread( $file_handle, 4377 ) ) ) {
+			if ( ( $file_data = @unpack( 'a255filename/a14size/a12mtime/a4096path', $file_buffer ) ) !== false ) {
+				if ( AI1WM_PACKAGE_NAME === trim( $file_data['filename'] ) ) {
+					return true;
+				}
+			}
+		}
+
+		@gzclose( $file_handle );
 	}
 
 	return false;
@@ -1868,6 +1963,7 @@ function ai1wm_setup_environment() {
 	@ini_set( 'pcre.backtrack_limit', PHP_INT_MAX );
 
 	// Set binary safe encoding
+	// phpcs:ignore PHPCompatibility.IniDirectives.RemovedIniDirectives
 	if ( @function_exists( 'mb_internal_encoding' ) && ( @ini_get( 'mbstring.func_overload' ) & 2 ) ) {
 		@mb_internal_encoding( 'ISO-8859-1' );
 	}
@@ -2204,6 +2300,7 @@ function ai1wm_encrypt_string( $string, $key ) {
 		throw new Ai1wm_Not_Encryptable_Exception( esc_html__( 'Could not generate random bytes. The process cannot continue.', 'all-in-one-wp-migration' ) );
 	}
 
+	// phpcs:ignore PHPCompatibility.FunctionUse.NewFunctionParameters, PHPCompatibility.Constants.NewConstants
 	$encrypted_string = openssl_encrypt( $string, AI1WM_CIPHER_NAME, $key, OPENSSL_RAW_DATA, $iv );
 	if ( $encrypted_string === false ) {
 		throw new Ai1wm_Not_Encryptable_Exception( esc_html__( 'Could not encrypt data. The process cannot continue.', 'all-in-one-wp-migration' ) );
@@ -2241,6 +2338,7 @@ function ai1wm_decrypt_string( $encrypted_string, $key ) {
 	$key       = substr( sha1( $key, true ), 0, $iv_length );
 	$iv        = substr( $encrypted_string, 0, $iv_length );
 
+	// phpcs:ignore PHPCompatibility.Constants.NewConstants, PHPCompatibility.FunctionUse.NewFunctionParameters
 	$decrypted_string = openssl_decrypt( substr( $encrypted_string, $iv_length ), AI1WM_CIPHER_NAME, $key, OPENSSL_RAW_DATA, $iv );
 	if ( $decrypted_string === false ) {
 		throw new Ai1wm_Not_Decryptable_Exception( esc_html__( 'Could not decrypt data. The process cannot continue.', 'all-in-one-wp-migration' ) );
@@ -2268,7 +2366,7 @@ function ai1wm_is_decryption_password_valid( $encrypted_signature, $password ) {
 
 function ai1wm_populate_roles() {
 	if ( ! function_exists( 'populate_roles' ) && ! function_exists( 'populate_options' ) && ! function_exists( 'populate_network' ) ) {
-		require_once( ABSPATH . 'wp-admin/includes/schema.php' );
+		require_once ABSPATH . 'wp-admin/includes/schema.php';
 	}
 
 	if ( function_exists( 'populate_roles' ) ) {

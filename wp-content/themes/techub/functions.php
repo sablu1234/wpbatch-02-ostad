@@ -103,6 +103,8 @@ include_once get_template_directory() . '/inc/nav-walker.php';
 include_once get_template_directory() . '/inc/recent-post.php';
 include_once get_template_directory() . '/inc/category-list.php';
 include_once get_template_directory() . '/inc/breadcrumb.php';
+include_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
+include_once get_template_directory() . '/inc/add_plugin.php';
 
 
 
@@ -145,3 +147,16 @@ function my_custom_data($m,$m2){
 add_filter('my_filter','my_custom_data',10,2);
 
 remove_filter('my_filter','my_custom_data',10,2);
+
+
+/**
+ * Fix ACF "Translation loading too early" notice
+ * and prevent Elementor editor conflict.
+ */
+add_action('init', function() {
+    // Check if ACF is active
+    if ( function_exists('load_plugin_textdomain') && function_exists('acf') ) {
+        load_plugin_textdomain('acf', false, dirname(plugin_basename(__FILE__)) . '/lang/');
+    }
+});
+

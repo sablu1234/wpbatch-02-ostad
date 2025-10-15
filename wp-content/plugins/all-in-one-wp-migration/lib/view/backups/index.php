@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php if ( is_readable( AI1WM_BACKUPS_PATH ) && is_writable( AI1WM_BACKUPS_PATH ) ) : ?>
 					<div id="ai1wm-backups-list">
-						<?php include AI1WM_TEMPLATES_PATH . '/backups/backups-list.php'; ?>
+						<?php require_once AI1WM_TEMPLATES_PATH . '/backups/backups-list.php'; ?>
 					</div>
 
 					<form action="" method="post" id="ai1wm-export-form" class="ai1wm-clear">
@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php else : ?>
 
-					<?php include AI1WM_TEMPLATES_PATH . '/backups/backups-permissions.php'; ?>
+					<?php require_once AI1WM_TEMPLATES_PATH . '/backups/backups-permissions.php'; ?>
 
 				<?php endif; ?>
 			</div>
@@ -78,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		</div>
 
-		<?php include AI1WM_TEMPLATES_PATH . '/common/sidebar-right.php'; ?>
+		<?php require_once AI1WM_TEMPLATES_PATH . '/common/sidebar-right.php'; ?>
 
 	</div>
 </div>

@@ -364,6 +364,21 @@ abstract class Ai1wm_Database {
 	}
 
 	/**
+	 * Get old replace values min length
+	 *
+	 * @return integer
+	 */
+	protected function get_old_replace_values_min_length() {
+		static $cached_result = null;
+
+		if ( $cached_result === null ) {
+			$cached_result = min( array_map( 'strlen', $this->get_old_replace_values() ) );
+		}
+
+		return $cached_result;
+	}
+
+	/**
 	 * Set new replace values
 	 *
 	 * @param  array  $values List of values
@@ -1647,7 +1662,9 @@ abstract class Ai1wm_Database {
 			$matches[1] = Ai1wm_Database_Utility::base64_decode( $matches[1] );
 
 			// Replace values
-			$matches[1] = Ai1wm_Database_Utility::replace_values( $matches[1], $this->get_old_replace_values(), $this->get_new_replace_values() );
+			if ( strlen( $matches[1] ) >= $this->get_old_replace_values_min_length() ) {
+				$matches[1] = Ai1wm_Database_Utility::replace_values( $matches[1], $this->get_old_replace_values(), $this->get_new_replace_values() );
+			}
 
 			// Encode base64 characters
 			$matches[1] = Ai1wm_Database_Utility::base64_encode( $matches[1] );
@@ -1670,7 +1687,9 @@ abstract class Ai1wm_Database {
 			$matches[2] = Ai1wm_Database_Utility::base64_decode( $matches[2] );
 
 			// Replace values
-			$matches[2] = Ai1wm_Database_Utility::replace_values( $matches[2], $this->get_old_replace_values(), $this->get_new_replace_values() );
+			if ( strlen( $matches[2] ) >= $this->get_old_replace_values_min_length() ) {
+				$matches[2] = Ai1wm_Database_Utility::replace_values( $matches[2], $this->get_old_replace_values(), $this->get_new_replace_values() );
+			}
 
 			// Encode base64 characters
 			$matches[2] = Ai1wm_Database_Utility::base64_encode( $matches[2] );
@@ -1693,7 +1712,9 @@ abstract class Ai1wm_Database {
 			$matches[1] = Ai1wm_Database_Utility::base64_decode( $matches[1] );
 
 			// Replace serialized values
-			$matches[1] = Ai1wm_Database_Utility::replace_serialized_values( $matches[1], $this->get_old_replace_values(), $this->get_new_replace_values() );
+			if ( strlen( $matches[1] ) >= $this->get_old_replace_values_min_length() ) {
+				$matches[1] = Ai1wm_Database_Utility::replace_serialized_values( $matches[1], $this->get_old_replace_values(), $this->get_new_replace_values() );
+			}
 
 			// Encode base64 characters
 			$matches[1] = Ai1wm_Database_Utility::base64_encode( $matches[1] );
@@ -1713,7 +1734,9 @@ abstract class Ai1wm_Database {
 		$matches[1] = Ai1wm_Database_Utility::unescape_mysql( $matches[1] );
 
 		// Replace serialized values
-		$matches[1] = Ai1wm_Database_Utility::replace_serialized_values( $matches[1], $this->get_old_replace_values(), $this->get_new_replace_values() );
+		if ( strlen( $matches[1] ) >= $this->get_old_replace_values_min_length() ) {
+			$matches[1] = Ai1wm_Database_Utility::replace_serialized_values( $matches[1], $this->get_old_replace_values(), $this->get_new_replace_values() );
+		}
 
 		// Escape MySQL special characters
 		$matches[1] = Ai1wm_Database_Utility::escape_mysql( $matches[1] );
@@ -2104,11 +2127,19 @@ abstract class Ai1wm_Database {
 	/**
 	 * Use MySQL transactions
 	 *
-	 * @return bolean
+	 * @return boolean
 	 */
 	protected function use_transactions() {
 		return true;
 	}
+
+	/**
+	 * Check whether table has auto increment attribute
+	 *
+	 * @param  string  $table_name Table name
+	 * @return boolean
+	 */
+	abstract public function has_auto_increment( $table_name );
 
 	/**
 	 * Run MySQL query

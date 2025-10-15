@@ -163,9 +163,9 @@
             var pid = selected.attr('data-pid');
 
             if (id > 0) {
-                $('.woosc-btn-' + pid).removeClass('woosc-btn-added woosc-added').attr('data-id', id);
+                $('.woosc-btn-' + pid).removeClass('woosc-btn-added woosc-added').attr('data-id', id).attr('data-product_id', id);
             } else {
-                $('.woosc-btn-' + pid).removeClass('woosc-btn-added woosc-added').attr('data-id', pid);
+                $('.woosc-btn-' + pid).removeClass('woosc-btn-added woosc-added').attr('data-id', pid).attr('data-product_id', pid);
             }
         }
     });
@@ -179,7 +179,7 @@
                 let $btn = $(this);
                 let text = $btn.data('text') !== undefined && $btn.data('text') !== '' ? $btn.data('text') : woosc_vars.button_text;
 
-                $btn.removeClass('woosc-btn-added woosc-added').attr('data-id', t.variation_id);
+                $btn.removeClass('woosc-btn-added woosc-added').attr('data-id', t.variation_id).attr('data-product_id', t.variation_id);
 
                 if ($btn.hasClass('woosc-btn-has-icon')) {
                     $btn.find('.woosc-btn-icon').removeClass(woosc_vars.button_added_icon).addClass(woosc_vars.button_normal_icon);
@@ -200,7 +200,7 @@
                 let $btn = $(this);
                 let text = $btn.data('text') !== undefined && $btn.data('text') !== '' ? $btn.data('text') : woosc_vars.button_text;
 
-                $btn.removeClass('woosc-btn-added woosc-added').attr('data-id', product_id);
+                $btn.removeClass('woosc-btn-added woosc-added').attr('data-id', product_id).attr('data-product_id', product_id);
 
                 if ($btn.hasClass('woosc-btn-has-icon')) {
                     $btn.find('.woosc-btn-icon').removeClass(woosc_vars.button_added_icon).addClass(woosc_vars.button_normal_icon);

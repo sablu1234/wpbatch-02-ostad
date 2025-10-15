@@ -3,16 +3,16 @@ Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, wpc, quickview, quick-view
 Tested up to: 6.8
-Version: 4.2.3
-Stable tag: 4.2.3
+Version: 4.2.4
+Stable tag: 4.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WPC Smart Quick View allows users to get a quick look of products without opening the product page.
+WPC Smart Quick View allows users to get a quick look at products without opening the product page.
 
 == Description ==
 
-**WPC Smart Quick View for WooCommerce** allows shop owners to set up a Quick view popup, which enables customers to get a quick summary of the product details without leaving the current page. WPC Smart Quick View brings about an advanced site navigation experience for your visitors and assists people in decision making; thus, turning more visitors into potential customers. It also helps to minimize the bounce rate and improve the site ranking. Besides, WPC Smart Quick View is fully optimized for SEO, compatible with any WordPress themes & WPML plugin for site translation. Especially, even on small screen hand-held devices, your site appearance would still be great thanks to the plugin’s high adaptability.
+**WPC Smart Quick View for WooCommerce** allows shop owners to set up a Quick view popup, which enables customers to get a quick summary of the product details without leaving the current page. WPC Smart Quick View brings about an advanced site navigation experience for your visitors and helps people in decision-making; thus, turning more visitors into potential customers. It also helps to minimize the bounce rate and improve the site ranking. Besides, WPC Smart Quick View is fully optimized for SEO, compatible with any WordPress themes & WPML plugin for site translation. Especially, even on small screen hand-held devices, your site appearance would still be great thanks to the plugin’s high adaptability.
 
 = Live demo =
 
@@ -56,8 +56,8 @@ Please try other plugins from us:
 
 1. Please make sure that you installed WooCommerce
 2. Go to plugins in your dashboard and select "Add New"
-3. Search for "WPC Smart Quick View", Install & Activate it
-4. Go to settings page to choose position and effect as you want
+3. Search for "WPC Smart Quick View," Install & Activate it
+4. Go to the settings page to choose the position and effect as you want
 
 == Frequently Asked Questions ==
 
@@ -86,6 +86,10 @@ Example:
 });`
 
 == Changelog ==
+
+= 4.2.4 =
+* Fixed: Minor CSS/JS issue for the backend
+* Updated: Compatible with WP 6.8 & Woo 10.2
 
 = 4.2.3 =
 * Fixed: Short description for variations

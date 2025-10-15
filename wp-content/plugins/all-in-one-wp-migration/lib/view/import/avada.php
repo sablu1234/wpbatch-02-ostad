@@ -51,4 +51,3 @@ echo wp_kses(
 	sprintf( __( '» <a class="ai1wm-no-underline" href="%s" target="_blank">Protect your site with real-time threat protection</a>', 'all-in-one-wp-migration' ), 'https://servmask.com/protect' ),
 	ai1wm_allowed_html_tags()
 );
-

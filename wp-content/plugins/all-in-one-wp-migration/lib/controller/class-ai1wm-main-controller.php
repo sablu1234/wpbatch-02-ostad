@@ -74,46 +74,23 @@ class Ai1wm_Main_Controller {
 	 * @return void
 	 */
 	private function activate_actions() {
-		// Init
+		// Load core functionality
+		add_action( 'admin_head', array( $this, 'admin_head' ) );
 		add_action( 'admin_init', array( $this, 'init' ) );
-
-		// Router
 		add_action( 'admin_init', array( $this, 'router' ) );
-
-		// Enable WP importing
 		add_action( 'admin_init', array( $this, 'wp_importing' ), 5 );
-
-		// Setup backups folder
 		add_action( 'admin_init', array( $this, 'setup_backups_folder' ) );
-
-		// Setup storage folder
 		add_action( 'admin_init', array( $this, 'setup_storage_folder' ) );
-
-		// Setup secret key
 		add_action( 'admin_init', array( $this, 'setup_secret_key' ) );
-
-		// Check user role capability
+		add_action( 'admin_init', array( $this, 'check_auto_increment' ) );
 		add_action( 'admin_init', array( $this, 'check_user_role_capability' ) );
-
-		// Schedule crons
 		add_action( 'admin_init', array( $this, 'schedule_crons' ) );
-
-		// Load text domain
 		add_action( 'admin_init', array( $this, 'load_textdomain' ) );
 
-		// Admin header
-		add_action( 'admin_head', array( $this, 'admin_head' ) );
-
-		// All-in-One WP Migration
+		// Load commands and buttons
 		add_action( 'plugins_loaded', array( $this, 'ai1wm_loaded' ), 10 );
-
-		// Export and import commands
 		add_action( 'plugins_loaded', array( $this, 'ai1wm_commands' ), 10 );
-
-		// Export and import buttons
 		add_action( 'plugins_loaded', array( $this, 'ai1wm_buttons' ), 10 );
-
-		// WP CLI commands
 		add_action( 'plugins_loaded', array( $this, 'wp_cli' ), 10 );
 
 		// Register scripts and styles
@@ -296,6 +273,8 @@ class Ai1wm_Main_Controller {
 	 */
 	public function setup_storage_folder() {
 		$this->create_storage_folder( AI1WM_STORAGE_PATH );
+		$this->create_storage_htaccess( AI1WM_STORAGE_HTACCESS );
+		$this->create_storage_webconfig( AI1WM_STORAGE_WEBCONFIG );
 		$this->create_storage_index_php( AI1WM_STORAGE_INDEX_PHP );
 		$this->create_storage_index_html( AI1WM_STORAGE_INDEX_HTML );
 	}
@@ -308,6 +287,24 @@ class Ai1wm_Main_Controller {
 	public function setup_secret_key() {
 		if ( ! get_option( AI1WM_SECRET_KEY ) ) {
 			update_option( AI1WM_SECRET_KEY, ai1wm_generate_random_string( 12 ) );
+		}
+	}
+
+	/**
+	 * Check auto increment
+	 *
+	 * @return void
+	 */
+	public function check_auto_increment() {
+		global $wpdb;
+
+		$db_client = Ai1wm_Database_Utility::create_client();
+		if ( ! $db_client->has_auto_increment( $wpdb->options ) ) {
+			if ( is_multisite() ) {
+				return add_action( 'network_admin_notices', array( $this, 'missing_auto_increment' ) );
+			} else {
+				return add_action( 'admin_notices', array( $this, 'missing_auto_increment' ) );
+			}
 		}
 	}
 
@@ -374,6 +371,38 @@ class Ai1wm_Main_Controller {
 	}
 
 	/**
+	 * Create storage .htaccess file
+	 *
+	 * @param  string Path to file
+	 * @return void
+	 */
+	public function create_storage_htaccess( $path ) {
+		if ( ! Ai1wm_File_Htaccess::storage( $path ) ) {
+			if ( is_multisite() ) {
+				return add_action( 'network_admin_notices', array( $this, 'storage_htaccess_notice' ) );
+			} else {
+				return add_action( 'admin_notices', array( $this, 'storage_htaccess_notice' ) );
+			}
+		}
+	}
+
+	/**
+	 * Create storage web.config file
+	 *
+	 * @param  string Path to file
+	 * @return void
+	 */
+	public function create_storage_webconfig( $path ) {
+		if ( ! Ai1wm_File_Webconfig::storage( $path ) ) {
+			if ( is_multisite() ) {
+				return add_action( 'network_admin_notices', array( $this, 'storage_webconfig_notice' ) );
+			} else {
+				return add_action( 'admin_notices', array( $this, 'storage_webconfig_notice' ) );
+			}
+		}
+	}
+
+	/**
 	 * Create storage index.php file
 	 *
 	 * @param  string Path to file
@@ -412,7 +441,7 @@ class Ai1wm_Main_Controller {
 	 * @return void
 	 */
 	public function create_backups_htaccess( $path ) {
-		if ( ! Ai1wm_File_Htaccess::create( $path ) ) {
+		if ( ! Ai1wm_File_Htaccess::backups( $path ) ) {
 			if ( is_multisite() ) {
 				return add_action( 'network_admin_notices', array( $this, 'backups_htaccess_notice' ) );
 			} else {
@@ -428,7 +457,7 @@ class Ai1wm_Main_Controller {
 	 * @return void
 	 */
 	public function create_backups_webconfig( $path ) {
-		if ( ! Ai1wm_File_Webconfig::create( $path ) ) {
+		if ( ! Ai1wm_File_Webconfig::backups( $path ) ) {
 			if ( is_multisite() ) {
 				return add_action( 'network_admin_notices', array( $this, 'backups_webconfig_notice' ) );
 			} else {
@@ -520,6 +549,24 @@ class Ai1wm_Main_Controller {
 	}
 
 	/**
+	 * Display notice for .htaccess file in storage directory
+	 *
+	 * @return void
+	 */
+	public function storage_htaccess_notice() {
+		Ai1wm_Template::render( 'main/storage-htaccess-notice' );
+	}
+
+	/**
+	 * Display notice for web.config file in storage directory
+	 *
+	 * @return void
+	 */
+	public function storage_webconfig_notice() {
+		Ai1wm_Template::render( 'main/storage-webconfig-notice' );
+	}
+
+	/**
 	 * Display notice for index.php file in storage directory
 	 *
 	 * @return void
@@ -598,6 +645,15 @@ class Ai1wm_Main_Controller {
 	 */
 	public function wordpress_htaccess_notice() {
 		Ai1wm_Template::render( 'main/wordpress-htaccess-notice' );
+	}
+
+	/**
+	 * Display notice for missing auto increment
+	 *
+	 * @return void
+	 */
+	public function missing_auto_increment() {
+		Ai1wm_Template::render( 'main/missing-auto-increment' );
 	}
 
 	/**
@@ -719,26 +775,26 @@ class Ai1wm_Main_Controller {
 			'ai1wm_feedback',
 			array(
 				'ajax'       => array(
-					'url' => wp_make_link_relative( admin_url( 'admin-ajax.php?action=ai1wm_feedback' ) ),
+					'url' => wp_make_link_relative( add_query_arg( array( 'ai1wm_import' => 1 ), admin_url( 'admin-ajax.php?action=ai1wm_feedback' ) ) ),
 				),
 				'secret_key' => get_option( AI1WM_SECRET_KEY ),
 			)
 		);
 
 		$upload_limit_text = sprintf(
-			/* translators: 1: Max upload file size. */
+			/* translators: 1: Max upload file size */
 			__(
 				'Your file exceeds the <strong>%1$s</strong> upload limit set by your host.<br />%2$s<br />%3$s',
 				'all-in-one-wp-migration'
 			),
 			esc_html( ai1wm_size_format( wp_max_upload_size() ) ),
 			sprintf(
-				/* translators: Link to Unlimited extension. */
+				/* translators: Link to Unlimited Extension */
 				__( 'Our <a href="%s" target="_blank">Unlimited Extension</a> bypasses this!', 'all-in-one-wp-migration' ),
 				'https://servmask.com/products/unlimited-extension?utm_source=file-import&utm_medium=plugin&utm_campaign=ai1wm'
 			),
 			sprintf(
-				/* translators: Link to how to article. */
+				/* translators: Link to how to article */
 				__( 'If you prefer a manual fix, follow our step-by-step guide on <a href="%s" target="_blank">raising your upload limit</a>.', 'all-in-one-wp-migration' ),
 				'https://help.servmask.com/2018/10/27/how-to-increase-maximum-upload-file-size-in-wordpress/'
 			)
@@ -800,18 +856,18 @@ class Ai1wm_Main_Controller {
 				/* translators: Disk space to free up. */
 				'out_of_disk_space'                   => __( 'Not enough disk space.<br /> Free up %s before restoring.', 'all-in-one-wp-migration' ),
 				'file_too_large'                      => sprintf(
-					/* translators: 1: Link to Unlimited extension, 2: Link to how to article. */
+					/* translators: 1: Link to Unlimited Extension, 2: Link to how to article */
 					__(
 						'Your file exceeds the upload limit set by your host web server.<br />%1$s<br />%2$s',
 						'all-in-one-wp-migration'
 					),
 					sprintf(
-						/* translators: Link to Unlimited extension. */
+						/* translators: Link to Unlimited Extension */
 						__( 'Our <a href="%s" target="_blank">Unlimited Extension</a> bypasses this!', 'all-in-one-wp-migration' ),
 						'https://servmask.com/products/unlimited-extension?utm_source=file-upload-webserver&utm_medium=plugin&utm_campaign=ai1wm'
 					),
 					sprintf(
-						/* translators: Link to how to article. */
+						/* translators: Link to how to article */
 						__( 'If you prefer a manual fix, follow our step-by-step guide on <a href="%s" target="_blank">raising your upload limit</a>.', 'all-in-one-wp-migration' ),
 						'https://help.servmask.com/2018/10/27/how-to-increase-maximum-upload-file-size-in-wordpress/'
 					)
@@ -826,9 +882,9 @@ class Ai1wm_Main_Controller {
 
 				// Backups
 				'want_to_delete_this_file'            => __( 'Are you sure you want to delete this backup?', 'all-in-one-wp-migration' ),
-				'unlimited'                           => __( 'Backup restore requires the Unlimited extension. <a href="https://servmask.com/products/unlimited-extension" target="_blank">Get it here</a>', 'all-in-one-wp-migration' ),
+				'unlimited'                           => __( 'Backup restore requires the Unlimited Extension. <a href="https://servmask.com/products/unlimited-extension" target="_blank">Get it here</a>', 'all-in-one-wp-migration' ),
 				'restore_from_file'                   => sprintf(
-					/* translators: 1: Link to Unlimited extension. */
+					/* translators: 1: Link to Unlimited Extension */
 					__( '"Restore" functionality is available in our <a href="%s" target="_blank">Unlimited Extension</a>.<br /> If you would rather go the manual route, you can still restore by downloading your backup and using "Import from file".', 'all-in-one-wp-migration' ),
 					'https://servmask.com/products/unlimited-extension?utm_source=restore-from-file&utm_medium=plugin&utm_campaign=ai1wm'
 				),
@@ -1062,24 +1118,6 @@ class Ai1wm_Main_Controller {
 			'ai1wm_updater',
 			Ai1wm_Template::asset_link( 'css/updater.min.css' )
 		);
-
-		ai1wm_register_script(
-			'ai1wm_updater',
-			Ai1wm_Template::asset_link( 'javascript/updater.min.js' ),
-			array( 'ai1wm_servmask' ),
-			AI1WM_VERSION,
-			false
-		);
-
-		wp_localize_script(
-			'ai1wm_updater',
-			'ai1wm_updater',
-			array(
-				'ajax' => array(
-					'url' => wp_make_link_relative( add_query_arg( array( 'ai1wm_nonce' => wp_create_nonce( 'ai1wm_updater' ) ), admin_url( 'admin-ajax.php?action=ai1wm_updater' ) ) ),
-				),
-			)
-		);
 	}
 
 	/**
@@ -1203,9 +1241,8 @@ class Ai1wm_Main_Controller {
 			return;
 		}
 
-		// Load scripts and styles
+		// Load styles
 		ai1wm_enqueue_style( 'ai1wm_updater' );
-		ai1wm_enqueue_script( 'ai1wm_updater' );
 	}
 
 	/**
@@ -1279,11 +1316,6 @@ class Ai1wm_Main_Controller {
 		add_action( 'wp_ajax_ai1wm_backup_list', 'Ai1wm_Backups_Controller::backup_list' );
 		add_action( 'wp_ajax_ai1wm_backup_list_content', 'Ai1wm_Backups_Controller::backup_list_content' );
 		add_action( 'wp_ajax_ai1wm_backup_download_file', 'Ai1wm_Backups_Controller::download_file' );
-
-		// Update actions
-		if ( current_user_can( 'update_plugins' ) ) {
-			add_action( 'wp_ajax_ai1wm_updater', 'Ai1wm_Updater_Controller::updater' );
-		}
 	}
 
 	/**
@@ -1327,8 +1359,6 @@ class Ai1wm_Main_Controller {
 	 * @return void
 	 */
 	public function handle_error_cleanup( $params, $exception = null ) {
-		if ( ! $exception instanceof Ai1wm_Import_Retry_Exception ) {
-			Ai1wm_Directory::delete( ai1wm_storage_path( $params ) );
-		}
+		Ai1wm_Directory::delete( ai1wm_storage_path( $params ) );
 	}
 }

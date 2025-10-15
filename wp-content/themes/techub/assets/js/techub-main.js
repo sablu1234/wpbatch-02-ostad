@@ -898,41 +898,43 @@
 
 		
 	// about inner testimonial 
-	var slider = new Swiper('.tp-testimonial-inner-active', {
-		slidesPerView: 4,
-		spaceBetween: 30,
-		loop: true,
-		rtl: rtl_setting,
-		pagination: {
-			el: ".team-slider-dot",
-			clickable: true,
-			renderBullet: function (index, className) {
-			  return '<span class="' + className + '">' + '<button>'+(index + 1)+'</button>' + "</span>";
+	function tp_testimonial(){
+		var slider = new Swiper('.tp-testimonial-inner-active', {
+			slidesPerView: 4,
+			spaceBetween: 30,
+			loop: true,
+			rtl: rtl_setting,
+			pagination: {
+				el: ".team-slider-dot",
+				clickable: true,
+				renderBullet: function (index, className) {
+				return '<span class="' + className + '">' + '<button>'+(index + 1)+'</button>' + "</span>";
+				},
 			},
-		},
-		breakpoints: {
-			'1200': {
-				slidesPerView: 1,
+			breakpoints: {
+				'1200': {
+					slidesPerView: 1,
+				},
+				'992': {
+					slidesPerView: 1,
+				},
+				'768': {
+					slidesPerView: 1,
+				},
+				'576': {
+					slidesPerView: 1,
+				},
+				'0': {
+					slidesPerView: 1,
+				},
 			},
-			'992': {
-				slidesPerView: 1,
+			// Navigation arrows
+			navigation: {
+				nextEl: '.slider-next',
+				prevEl: '.slider-prev',
 			},
-			'768': {
-				slidesPerView: 1,
-			},
-			'576': {
-				slidesPerView: 1,
-			},
-			'0': {
-				slidesPerView: 1,
-			},
-		},
-		// Navigation arrows
-		navigation: {
-			nextEl: '.slider-next',
-			prevEl: '.slider-prev',
-		},
-	});
+		});
+	}
 
 
 
@@ -995,17 +997,22 @@
 	
 	////////////////////////////////////////////////////
 	// 07. tp-faq-slide
-	var slider = new Swiper('.tp-faq-slide', {
-		slidesPerView: 1,
-		spaceBetween: 0,
-		autoplay: true,
-		effect: "fade",
-		loop: true,
-		pagination: {
-			el: ".tp-faq-5-pagenation",
-			clickable: true,
-		  },
-	});
+
+
+	function tp_faq_slider(){
+		var slider = new Swiper('.tp-faq-slide', {
+			slidesPerView: 1,
+			spaceBetween: 0,
+			autoplay: true,
+			effect: "fade",
+			loop: true,
+			pagination: {
+				el: ".tp-faq-5-pagenation",
+				clickable: true,
+			},
+		});
+	}
+	
 
 
 
@@ -1472,6 +1479,18 @@
 			
 			
 	
+		});
+
+
+
+		// elementor fronted view
+		$(window).on("elementor/frontend/init", function () {
+			elementorFrontend.hooks.addAction(
+				"frontend/element_ready/techub-feature-list.default",tp_faq_slider,
+			);
+			elementorFrontend.hooks.addAction(
+				"frontend/element_ready/techub-testimonial.default",tp_testimonial,
+			);
 		});
 
 })(jQuery);

@@ -119,7 +119,7 @@ final class Techub_Core {
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor */
 			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'elementor-hello-world' ),
-			'<strong>' . esc_html__( 'Elementor Hello World', 'elementor-hello-world' ) . '</strong>',
+			'<strong>' . esc_html__( 'Techub Core', 'elementor-hello-world' ) . '</strong>',
 			'<strong>' . esc_html__( 'Elementor', 'elementor-hello-world' ) . '</strong>'
 		);
 

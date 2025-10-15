@@ -59,4 +59,3 @@ if ( $should_reset_permalinks ) {
 		ai1wm_allowed_html_tags()
 	);
 }
-

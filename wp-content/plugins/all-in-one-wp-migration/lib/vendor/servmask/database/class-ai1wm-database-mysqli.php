@@ -32,6 +32,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Ai1wm_Database_Mysqli extends Ai1wm_Database {
 
 	/**
+	 * Check whether table has auto increment attribute
+	 *
+	 * @param  string  $table_name Table name
+	 * @return boolean
+	 */
+	public function has_auto_increment( $table_name ) {
+		return stripos( $this->get_create_table( $table_name ), 'AUTO_INCREMENT' ) !== false;
+	}
+
+	/**
 	 * Run MySQL query
 	 *
 	 * @param  string $input SQL query
@@ -113,6 +123,10 @@ class Ai1wm_Database_Mysqli extends Ai1wm_Database {
 	 * @return array
 	 */
 	public function fetch_assoc( &$result ) {
+		if ( $result === false ) {
+			return false;
+		}
+
 		return mysqli_fetch_assoc( $result );
 	}
 
@@ -123,6 +137,10 @@ class Ai1wm_Database_Mysqli extends Ai1wm_Database {
 	 * @return array
 	 */
 	public function fetch_row( &$result ) {
+		if ( $result === false ) {
+			return false;
+		}
+
 		return mysqli_fetch_row( $result );
 	}
 
@@ -133,6 +151,10 @@ class Ai1wm_Database_Mysqli extends Ai1wm_Database {
 	 * @return integer
 	 */
 	public function num_rows( &$result ) {
+		if ( $result === false ) {
+			return 0;
+		}
+
 		return mysqli_num_rows( $result );
 	}
 
@@ -143,6 +165,10 @@ class Ai1wm_Database_Mysqli extends Ai1wm_Database {
 	 * @return boolean
 	 */
 	public function free_result( &$result ) {
+		if ( $result === false ) {
+			return true;
+		}
+
 		return mysqli_free_result( $result );
 	}
 }

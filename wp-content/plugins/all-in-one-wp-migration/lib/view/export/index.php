@@ -43,13 +43,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<form action="" method="post" id="ai1wm-export-form" class="ai1wm-clear">
 
-						<?php include AI1WM_TEMPLATES_PATH . '/export/find-replace.php'; ?>
+						<?php require_once AI1WM_TEMPLATES_PATH . '/export/find-replace.php'; ?>
 
 						<?php do_action( 'ai1wm_export_left_options' ); ?>
 
-						<?php include AI1WM_TEMPLATES_PATH . '/export/advanced-settings.php'; ?>
+						<?php require_once AI1WM_TEMPLATES_PATH . '/export/advanced-settings.php'; ?>
 
-						<?php include AI1WM_TEMPLATES_PATH . '/export/export-buttons.php'; ?>
+						<?php require_once AI1WM_TEMPLATES_PATH . '/export/export-buttons.php'; ?>
 
 						<input type="hidden" name="ai1wm_manual_export" value="1" />
 
@@ -59,13 +59,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php else : ?>
 
-					<?php include AI1WM_TEMPLATES_PATH . '/export/export-permissions.php'; ?>
+					<?php require_once AI1WM_TEMPLATES_PATH . '/export/export-permissions.php'; ?>
 
 				<?php endif; ?>
 			</div>
 		</div>
 
-		<?php include AI1WM_TEMPLATES_PATH . '/common/sidebar-right.php'; ?>
+		<?php require_once AI1WM_TEMPLATES_PATH . '/common/sidebar-right.php'; ?>
 
 	</div>
 </div>

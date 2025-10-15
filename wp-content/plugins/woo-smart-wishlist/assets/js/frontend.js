@@ -216,7 +216,7 @@
                 }
 
                 if (woosw_vars.button_action === 'no') {
-                    // add to wishlist solely
+                    // add to the wishlist solely
                     $('#woosw_wishlist').removeClass('woosw-loaded');
                 }
 

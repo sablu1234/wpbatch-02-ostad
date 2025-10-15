@@ -3,8 +3,8 @@ Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, wpc, wishlist, wait-list
 Tested up to: 6.8
-Version: 5.0.2
-Stable tag: 5.0.2
+Version: 5.0.4
+Stable tag: 5.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,10 +48,10 @@ Visit our [live demo 01](https://demo.wpclever.net/woosw/ "live demo 01") or [li
 Newly added feature for management: It's now possible to see all wishlists that a product was included in and check out all wishlists created by a user.
 
 = The Importance of Adding a Wishlist button =
-Many store owners miss the opportunities for selling items for their current customers because they’re not offering Add to Wishlist button on their shop or single product page. On many occasions, buyers need time to rethink their needs and allowing them to add products to wishlist increase the possibility for buyers to purchase these items in the future. As it is truly convenient and speedy to add, remove, proceed to check out or continue shopping, buyers will find the whole purchase flow an enjoyable process. Thus, this improves the shopping experience for your customers. In addition, enabling Add to Wishlist button is helpful for buyers to save an Out-of-Stock product for purchasing when it is restocked at a later time. Shop owners can control the wishlist availability by enabling it for authenticated users only, hence, encourage more membership engagement from visitors. Never miss any chance to strengthen the bond with your customers with an Add to Wishlist button on every product page and shop page of your site.
+Many store owners miss the opportunities for selling items for their current customers because they’re not offering Add to Wishlist button on their shop or single product page. On many occasions, buyers need time to rethink their needs and allowing them to add products to wishlist increase the possibility for buyers to purchase these items in the future. As it is truly convenient and speedy to add, remove, proceed to check out, or continue shopping, buyers will find the whole purchase flow an enjoyable process. Thus, this improves the shopping experience for your customers. In addition, enabling Add to Wishlist button is helpful for buyers to save an Out-of-Stock product for purchasing when it is restocked at a later time. Shop owners can control the wishlist availability by enabling it for authenticated users only, hence, encourage more membership engagement from visitors. Never miss any chance to strengthen the bond with your customers with an Add to Wishlist button on every product page and shop page of your site.
 
 = Product Details at a Glance =
-The wishlist items are displayed in great detail so that buyers don’t need to browse the single product page for more information when the title, price, stock status, thumbnail image and date of adding to the wishlist are smartly arranged in the wishlist page or wishlist popup. Buyers can also see a counter showing how many items have been added to their wishlist: a notification for urging them to checkout or to manage the list by removing unwanted items. By keeping your customers on your site, store owners can increase the conversion rate when buyers revise the list and find something useful that they might have missed or forgotten to purchase before. Controlling the wishlist is intuitive because there is a button to remove any item from the list. Users take full control of actions triggered by the wishlist button when an item is already added to the list.
+The wishlist items are displayed in great detail so that buyers don’t need to browse the single product page for more information when the title, price, stock status, thumbnail image, and date of adding to the wishlist are smartly arranged in the wishlist page or wishlist popup. Buyers can also see a counter showing how many items have been added to their wishlist: a notification for urging them to checkout or to manage the list by removing unwanted items. By keeping your customers on your site, store owners can increase the conversion rate when buyers revise the list and find something useful that they might have missed or forgotten to purchase before. Controlling the wishlist is intuitive because there is a button to remove any item from the list. Users take full control of actions triggered by the wishlist button when an item is already added to the list.
 
 = Ultra-speedy Performance =
 There’s nearly zero delay speed for this Smart Wishlist plugin when visitors perform any kind of actions: item addition or removal, closing the wishlist popup or open the wishlist page, it all happens immediately with precision. Wishlist popup also allows an overlay effect that keeps the popup opens while visitors can still scroll the background page until the Continue Shopping button or Close button is pressed. Our plugin is compatible with all WPClever plugins, most common WooCommerce add-ons and WordPress themes, so the flexibility is really high with smooth performance for your website. Smart Wishlist can work in similar ways with any product bundles, composite deals, bought together offers, grouped or force-sell products made with our plugins.
@@ -76,8 +76,8 @@ Please try other plugins from us:
 
 1. Please make sure that you installed WooCommerce
 2. Go to plugins in your dashboard and select "Add New"
-3. Search for "WPC Smart Wishlist", Install & Activate it
-4. Go to settings page to choose position and effect as you want
+3. Search for "WPC Smart Wishlist," Install & Activate it
+4. Go to the settings page to choose the position and effect as you want
 
 == Frequently Asked Questions ==
 
@@ -97,6 +97,13 @@ Example:
 `echo do_shortcode('[woosw id="99"]');`
 
 == Changelog ==
+
+= 5.0.4 =
+* Fixed: Security vulnerability reported by Wordfence
+
+= 5.0.3 =
+* Fixed: Minor JS issue in the backend
+* Updated: Compatible with WP 6.8 & Woo 10.2
 
 = 5.0.2 =
 * Updated: Optimized the code
