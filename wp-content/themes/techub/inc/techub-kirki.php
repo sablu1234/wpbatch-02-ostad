@@ -38,13 +38,13 @@ function techub_header_info_section(){
 	new \Kirki\Field\Select(
 	[
 		'settings'    => 'header_style_kirki',
-		'label'       => esc_html__( 'Select Header Style', 'kirki' ),
+		'label'       => esc_html__( 'Select Header Style', 'techub' ),
 		'section'     => 'techub_header_section',
 		'default'     => 'header_kirki_1',
-		'placeholder' => esc_html__( 'Choose an option', 'kirki' ),
+		'placeholder' => esc_html__( 'Choose an option', 'techub' ),
 		'choices'     => [
-			'header_kirki_1' => esc_html__( 'Header 01', 'kirki' ),
-			'header_kirki_2' => esc_html__( 'Header 2', 'kirki' ),
+			'header_kirki_1' => esc_html__( 'Header 01', 'techub' ),
+			'header_kirki_2' => esc_html__( 'Header 2', 'techub' ),
 		],
 	]
 );

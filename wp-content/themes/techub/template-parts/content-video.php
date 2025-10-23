@@ -22,7 +22,7 @@ $has_tag_class = has_tag() ? 'text-lg-end' : '';
             </div>
             <?php if(!empty($post_format_url)) :?>
             <div class="tp-postbox-thumb-video">
-                <a class="popup-video" href="<?php echo $post_format_url;?>"><i class="fa-regular fa-play"></i></a>
+                <a class="popup-video" href="<?php echo esc_url( $post_format_url ); ?>"><i class="fa-regular fa-play"></i></a>
             </div>
             <?php endif;?>
         </div>
@@ -91,9 +91,9 @@ $has_tag_class = has_tag() ? 'text-lg-end' : '';
             </div>
             <?php if(!empty($post_format_url)) :?>
             <div class="tp-postbox-thumb-video">
-                <a class="popup-video" href="<?php echo $post_format_url;?>"><i class="fa-regular fa-play"></i></a>
+                <a class="popup-video" href="<?php echo esc_url( $post_format_url ); ?>"><i class="fa-regular fa-play"></i></a>
             </div>
-            <?php endif;?>
+            <?php endif; ?>
         </div>
     <?php endif;?>
 

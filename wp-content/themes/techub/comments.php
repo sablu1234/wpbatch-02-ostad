@@ -10,7 +10,7 @@ if (comments_open()) :
             <h2 class="postbox__comment-title">
                 <?php
                 $comment_count = get_comments_number();
-                echo esc_html($comment_count) . ' ' . _n('Comment', 'Comments', $comment_count, 'harry');
+                echo esc_html($comment_count) . ' ' . _n('Comment', 'Comments', $comment_count, 'techub');
                 ?>
             </h2>
 
@@ -27,8 +27,8 @@ if (comments_open()) :
             <?php
             // Display comment pagination if needed
             the_comments_pagination(array(
-                'prev_text' => esc_html__('Previous', 'harry'),
-                'next_text' => esc_html__('Next', 'harry'),
+                'prev_text' => esc_html__('Previous', 'techub'),
+                'next_text' => esc_html__('Next', 'techub'),
             ));
         endif;
         
@@ -42,15 +42,15 @@ if (comments_open()) :
         $req = get_option('require_name_email');
 
         $fields = array(
-            'author' => '<div class="row"><div class="col-md-6"><div  class="tp-postbox-contact-input"><input type="text" name="author" id="author" placeholder="' . esc_attr__('Your Name*', 'harry') . '" value="' . esc_attr($commenter['comment_author']) . '" ' . ($req ? 'required' : '') . '></div>
+            'author' => '<div class="row"><div class="col-md-6"><div  class="tp-postbox-contact-input"><input type="text" name="author" id="author" placeholder="' . esc_attr__('Your Name*', 'techub') . '" value="' . esc_attr($commenter['comment_author']) . '" ' . ($req ? 'required' : '') . '></div>
          </div>',
             'email' => '<div class="col-md-6"><div class="tp-postbox-contact-input">
-               <input type="email" name="email" id="email" placeholder="' . esc_attr__('Your E-mail', 'harry') . '" value="' . esc_attr($commenter['comment_author_email']) . '" ' . ($req ? 'required' : '') . '>
+               <input type="email" name="email" id="email" placeholder="' . esc_attr__('Your E-mail', 'techub') . '" value="' . esc_attr($commenter['comment_author_email']) . '" ' . ($req ? 'required' : '') . '>
             </div>
          </div>',
             'url' => '<div class="col-md-12">
             <div class="tp-postbox-contact-input">
-               <input type="text" name="url" id="url" placeholder="' . esc_attr__('Website', 'harry') . '" value="' . esc_attr($commenter['comment_author_url']) . '">
+               <input type="text" name="url" id="url" placeholder="' . esc_attr__('Website', 'techub') . '" value="' . esc_attr($commenter['comment_author_url']) . '">
             </div>
          </div></div>',
         );
@@ -60,13 +60,13 @@ if (comments_open()) :
             'fields'             => $fields,
             'comment_field' => '<div class="col-md-12 ' . $cl . '">
                     <div class="tp-postbox-contact-input">
-                       <textarea id="comment" name="comment" placeholder="' . esc_attr__('Your Comment Here...', 'harry') . '" required></textarea>
+                       <textarea id="comment" name="comment" placeholder="' . esc_attr__('Your Comment Here...', 'techub') . '" required></textarea>
                     </div>
                 </div>
             ',
             'submit_button' => '<div class="col-md-12">
                                     <div class="tp-postbox-contact-input-btn">
-                                       <button type="submit" class="tp-btn"><span>' . esc_html__('Submit Comment', 'harry') . '</span></button>
+                                       <button type="submit" class="tp-btn"><span>' . esc_html__('Submit Comment', 'techub') . '</span></button>
                                     </div>
                                 </div>',
 
@@ -100,7 +100,7 @@ function custom_comment_list($comment, $args, $depth) {
         // Display pingbacks and trackbacks differently if needed
         ?>
         <li class="pingback">
-            <p><?php esc_html_e('Pingback:', 'harry'); ?> <?php comment_author_link(); ?></p>
+            <p><?php esc_html_e('Pingback:', 'techub'); ?> <?php comment_author_link(); ?></p>
         </li>
         <?php
     } else {
@@ -118,7 +118,7 @@ function custom_comment_list($comment, $args, $depth) {
                                 <h5 class="tp-postbox-comment-name"><?php comment_author(); ?></h5>
                             </div>
                             <?php if ($comment->comment_approved == '0') : ?>
-                                <p><?php esc_html_e('Your comment is awaiting moderation.', 'harry'); ?></p>
+                                <p><?php esc_html_e('Your comment is awaiting moderation.', 'techub'); ?></p>
                             <?php endif; ?>
                             <?php comment_text(); ?>
                             <div class="tp-postbox-comment-reply"><i class="fa-light fa-reply"></i> <?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))); ?></div>

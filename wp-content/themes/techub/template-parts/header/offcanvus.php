@@ -28,7 +28,7 @@ $header_side_social_info_switch = get_theme_mod('header_side_social_info_switch'
 
             <?php if(!empty($header_side_logo)) : ?>
             <div class="tpoffcanvas__logo">
-                <a href="<?php echo home_url('/'); ?>">
+                <a href="<?php echo esc_url(home_url('/')); ?>">
                     <img src="<?php echo esc_url($header_side_logo); ?>" alt="">
                 </a>
             </div>

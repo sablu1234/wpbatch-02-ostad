@@ -4,10 +4,10 @@ function techub_breadcrumb(){
     global $post;  
 
     if ( is_front_page() && is_home() ) {
-        $title = esc_html__( 'Home', 'harry' );
+        $title = esc_html__( 'Home', 'techub' );
     }
     elseif ( is_front_page() ) {
-        $title = esc_html__( 'Front Page', 'harry' );
+        $title = esc_html__( 'Front Page', 'techub' );
     }
     elseif ( is_home() ) {
         if ( get_option( 'page_for_posts' ) ) {
@@ -21,13 +21,13 @@ function techub_breadcrumb(){
       $title = get_the_title();
     } 
     elseif ( is_single() && 'product' == get_post_type() ) {
-        $title = get_theme_mod( 'breadcrumb_product_details', __( 'Shop', 'harry' ) );
+        $title = get_theme_mod( 'breadcrumb_product_details', __( 'Shop', 'techub' ) );
     } 
     elseif ( is_search() ) {
-        $title = esc_html__( 'Search Results for : ', 'harry' ) . get_search_query();
+        $title = esc_html__( 'Search Results for : ', 'techub' ) . get_search_query();
     } 
     elseif ( is_404() ) {
-        $title = esc_html__( 'Page not Found', 'harry' );
+        $title = esc_html__( 'Page not Found', 'techub' );
     } 
     elseif ( is_archive() ) {
         $title = get_the_archive_title();

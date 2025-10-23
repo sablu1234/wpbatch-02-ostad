@@ -2,6 +2,18 @@
 
 function techub_theme_support(){
     add_theme_support( 'post-thumbnails' );
+
+
+	/**
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory.
+	 * If you're building a theme based on harry, use a find and replace
+	 * to change 'harry' to the name of your theme in all the template files.
+	 */
+
+	load_theme_textdomain( 'techub', get_template_directory() . '/languages' );
+
+
     /** automatic feed link*/
     add_theme_support( 'automatic-feed-links' );
     /** tag-title **/
@@ -100,8 +112,6 @@ add_action( 'widgets_init', 'techub_widgets_init' );
 include_once get_template_directory() . '/inc/common/scripts.php';
 include_once get_template_directory() . '/inc/template-function.php';
 include_once get_template_directory() . '/inc/nav-walker.php';
-include_once get_template_directory() . '/inc/recent-post.php';
-include_once get_template_directory() . '/inc/category-list.php';
 include_once get_template_directory() . '/inc/breadcrumb.php';
 include_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
 include_once get_template_directory() . '/inc/add_plugin.php';
@@ -109,7 +119,7 @@ include_once get_template_directory() . '/inc/add_plugin.php';
 
 
 
-if ( class_exists( 'Kirki' ) ) {
+if ( class_exists( 'techub' ) ) {
 	function techub_load_kirki_file() {
 		// Kirki include
 		include_once get_template_directory() . '/inc/techub-kirki.php';
@@ -119,34 +129,7 @@ if ( class_exists( 'Kirki' ) ) {
 
 
 
-// action hooks
-function hy_fun(){
-	echo '<h2> Heading 01 </h2>';
-}
-add_action('my_action','hy_fun',2);
 
-function hy_fun_2(){
-	echo '<h2> Heading 02</h2>';
-}
-add_action('my_action','hy_fun_2',1);
-
-function hy_fun_3(){
-	echo '<h2> Heading 03 </h2>';
-}
-add_action('my_action','hy_fun_3',3);
-
-remove_action('my_action','hy_fun_3',3);
-remove_action('my_action','hy_fun_2',1);
-
-// filters hooks
-function my_custom_data($m,$m2){
-	echo strtoupper($m= '<h1>Hello new text</h1>');
-	echo ucwords($m2= '<h1>Hello new text 2</h1>');
-	return;
-}
-add_filter('my_filter','my_custom_data',10,2);
-
-remove_filter('my_filter','my_custom_data',10,2);
 
 
 /**

@@ -15,6 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class Techub_Heading extends Widget_Base {
 
+	use \TPElements_Common;
+
 	/**
 	 * Retrieve the widget name.
 	 *
@@ -105,73 +107,77 @@ class Techub_Heading extends Widget_Base {
 
 	// style register control section
 	protected function register_controls_section(){
-		$this->start_controls_section(
-			'hero_section',
-			[
-				'label' => esc_html__( 'Title and Content', 'textdomain' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-			]
-		);
 
-		$this->add_control(
-			'techub_sub_title',
-			[
-				'label' => esc_html__( 'Sub Title', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Subtitle title', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your sub title here', 'textdomain' ),
-			]
-		);
-		$this->add_control(
-			'techub_title',
-			[
-				'label' => esc_html__( 'Title', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Default title', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
-			]
-		);
+		$this->common_section('team','Test Heading');
+		$this->common_section('about','About Heading');
 
-		$this->add_control(
-			'techub_description',
-			[
-				'label' => esc_html__( 'Description', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 5,
-				'default' => esc_html__( 'Default description', 'textdomain' ),
-				'placeholder' => esc_html__( 'Type your description here', 'textdomain' ),
-			]
-		);
+		// $this->start_controls_section(
+		// 	'hero_section',
+		// 	[
+		// 		'label' => esc_html__( 'Title and Content', 'textdomain' ),
+		// 		'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'techub_sub_title',
+		// 	[
+		// 		'label' => esc_html__( 'Sub Title', 'textdomain' ),
+		// 		'type' => \Elementor\Controls_Manager::TEXT,
+		// 		'default' => esc_html__( 'Subtitle title', 'textdomain' ),
+		// 		'placeholder' => esc_html__( 'Type your sub title here', 'textdomain' ),
+		// 	]
+		// );
+		// $this->add_control(
+		// 	'techub_title',
+		// 	[
+		// 		'label' => esc_html__( 'Title', 'textdomain' ),
+		// 		'type' => \Elementor\Controls_Manager::TEXT,
+		// 		'default' => esc_html__( 'Default title', 'textdomain' ),
+		// 		'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'techub_description',
+		// 	[
+		// 		'label' => esc_html__( 'Description', 'textdomain' ),
+		// 		'type' => \Elementor\Controls_Manager::TEXTAREA,
+		// 		'rows' => 5,
+		// 		'default' => esc_html__( 'Default description', 'textdomain' ),
+		// 		'placeholder' => esc_html__( 'Type your description here', 'textdomain' ),
+		// 	]
+		// );
 
 
-			$this->add_control(
-			'text_align',
-			[
-				'label' => esc_html__( 'Alignment', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'textdomain' ),
-						'icon' => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'textdomain' ),
-						'icon' => 'eicon-text-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'textdomain' ),
-						'icon' => 'eicon-text-align-right',
-					],
-				],
-				'default' => 'center',
-				'toggle' => true,
-				'selectors' => [
-					'{{WRAPPER}} .tp-el-align' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
+		// 	$this->add_control(
+		// 	'text_align',
+		// 	[
+		// 		'label' => esc_html__( 'Alignment', 'textdomain' ),
+		// 		'type' => \Elementor\Controls_Manager::CHOOSE,
+		// 		'options' => [
+		// 			'left' => [
+		// 				'title' => esc_html__( 'Left', 'textdomain' ),
+		// 				'icon' => 'eicon-text-align-left',
+		// 			],
+		// 			'center' => [
+		// 				'title' => esc_html__( 'Center', 'textdomain' ),
+		// 				'icon' => 'eicon-text-align-center',
+		// 			],
+		// 			'right' => [
+		// 				'title' => esc_html__( 'Right', 'textdomain' ),
+		// 				'icon' => 'eicon-text-align-right',
+		// 			],
+		// 		],
+		// 		'default' => 'center',
+		// 		'toggle' => true,
+		// 		'selectors' => [
+		// 			'{{WRAPPER}} .tp-el-align' => 'text-align: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
 
-		$this->end_controls_section();
+		// $this->end_controls_section();
 
 
 	
@@ -312,15 +318,28 @@ class Techub_Heading extends Widget_Base {
 
 
 		 <div class="tp-section-5-title-wrapper wow fadeInUp tp-el-align">
-			<?php if(!empty($settings['techub_sub_title'])) : ?>
-			<span class="tp-section-5-subtitle tp-el-sub-title"><?php echo techub_kses($settings['techub_sub_title'])?></span>
+			<?php if(!empty($settings['techub_team_sub_title'])) : ?>
+			<span class="tp-section-5-subtitle tp-el-sub-title"><?php echo techub_kses($settings['techub_team_sub_title'])?></span>
 			<?php endif;?>
 
-			<?php if(!empty($settings['techub_title'])) : ?>
-			<h3 class="tp-section-5-title tp-el-title"><?php echo techub_kses($settings['techub_title'])?></span></h3>
+			<?php if(!empty($settings['techub_team_title'])) : ?>
+			<h3 class="tp-section-5-title tp-el-title"><?php echo techub_kses($settings['techub_team_title'])?></span></h3>
 			<?php endif;?>
-			<?php if(!empty($settings['techub_description'])) : ?>
-			<p class="tp-el-content"><?php echo techub_kses($settings['techub_description'])?></p>
+			<?php if(!empty($settings['techub_team_description'])) : ?>
+			<p class="tp-el-content"><?php echo techub_kses($settings['techub_team_description'])?></p>
+			<?php endif;?>
+		</div>
+
+		 <div class="tp-section-5-title-wrapper wow fadeInUp tp-el-align">
+			<?php if(!empty($settings['techub_about_sub_title'])) : ?>
+			<span class="tp-section-5-subtitle tp-el-sub-title"><?php echo techub_kses($settings['techub_about_sub_title'])?></span>
+			<?php endif;?>
+
+			<?php if(!empty($settings['techub_about_title'])) : ?>
+			<h3 class="tp-section-5-title tp-el-title"><?php echo techub_kses($settings['techub_about_title'])?></span></h3>
+			<?php endif;?>
+			<?php if(!empty($settings['techub_about_description'])) : ?>
+			<p class="tp-el-content"><?php echo techub_kses($settings['techub_about_description'])?></p>
 			<?php endif;?>
 		</div>
 		

@@ -25,8 +25,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @since 1.2.0
  */
 
+
+include_once('include/custom-widget/recent-post.php');
+include_once('include/custom-widget/category-list.php');
 include_once('include/core-function.php');
 include_once('include/portfolio-post.php');
+include_once('include/class-ocdi-importer.php');
 
 
 final class Techub_Core {

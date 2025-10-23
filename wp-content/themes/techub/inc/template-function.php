@@ -29,7 +29,7 @@ add_action( 'techub_header_before' , 'techub_header' );
 function techub_header_logo(){
     $header_logo = get_theme_mod('header_logo', get_template_directory_uri().'/assets/img/logo/logo.png');
     ?>
-    <a href="<?php echo home_url('/'); ?>"><img src="<?php echo esc_url($header_logo);?>'" alt=""></a>
+    <a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo esc_url($header_logo);?>'" alt=""></a>
     <?php
 }
 
@@ -191,8 +191,8 @@ function techub_kses( $allow_tags = '' ) {
 function techub_navigation(){
    $pages = paginate_links( array( 
        'type' => 'array',
-       'prev_text'    => __('<i class="fa-solid fa-arrow-left-long"></i>','harry'),
-       'next_text'    => __('<i class="fa-solid fa-arrow-right-long"></i>','harry'),
+       'prev_text'    => __('<i class="fa-solid fa-arrow-left-long"></i>','techub'),
+       'next_text'    => __('<i class="fa-solid fa-arrow-right-long"></i>','techub'),
    ) );
        if( $pages ) {
        echo '<div class="tp-postbox-pagination"><nav><ul>';
@@ -213,7 +213,7 @@ function techub_search_form( $form ) {
 	$form = ' <div class="sidebar__widget-theme-bg">
                <div class="sidebar__widget-content">
                   <div class="sidebar__search">
-                        <form role="search" method="get" action="' . home_url( '/' ) . '">
+                        <form role="' . get_search_form(). '" method="get" action="' . home_url( '/' ) . '">
                            <div class="sidebar__search-input-2">
                               <input type="text" value="' . get_search_query() . '" name="s" placeholder="Search here">
                               <button type="submit"><i class="far fa-search"></i></button>

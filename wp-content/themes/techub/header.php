@@ -11,6 +11,7 @@
 </head>
 
 <body <?php body_class();?> >
+    <?php wp_body_open(); ?>
 
 <?php do_action('techub_header_before');
 

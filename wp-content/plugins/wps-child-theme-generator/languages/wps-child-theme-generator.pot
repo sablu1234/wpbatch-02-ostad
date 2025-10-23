@@ -1,0 +1,289 @@
+# Copyright (C) 2024 WPServeur, Benoti, NicolasKulka
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPS Child Theme Generator 1.5.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wps-child-theme-generator\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-05-13T14:10:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wps-child-theme-generator\n"
+
+#. Plugin Name of the plugin
+#: classes/plugin.php:31
+#: classes/plugin.php:32
+msgid "WPS Child Theme Generator"
+msgstr ""
+
+#. Description of the plugin
+msgid "WPS Child Theme Generator."
+msgstr ""
+
+#. Author of the plugin
+msgid "WPServeur, Benoti, NicolasKulka"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpserveur.net"
+msgstr ""
+
+#: admin_page/plugin.php:24
+msgid "Parent Theme"
+msgstr ""
+
+#: admin_page/plugin.php:28
+msgid "Select a template"
+msgstr ""
+
+#: admin_page/plugin.php:36
+msgid "Title"
+msgstr ""
+
+#: admin_page/plugin.php:41
+msgid "Only Alphanumeric is allowed with Spaces"
+msgstr ""
+
+#: admin_page/plugin.php:48
+msgid "Theme URI"
+msgstr ""
+
+#: admin_page/plugin.php:58
+msgid "Author"
+msgstr ""
+
+#: admin_page/plugin.php:66
+msgid "Author URI"
+msgstr ""
+
+#: admin_page/plugin.php:74
+msgid "Screenshot"
+msgstr ""
+
+#: admin_page/plugin.php:79
+#: classes/plugin.php:68
+msgid "Add screenshot"
+msgstr ""
+
+#: admin_page/plugin.php:79
+msgid "Screenshot can be no larger than 1200x900px, recommanded 600x450px"
+msgstr ""
+
+#: admin_page/plugin.php:86
+msgid "Add CSS"
+msgstr ""
+
+#: admin_page/plugin.php:95
+msgid "Send child theme by email"
+msgstr ""
+
+#: admin_page/plugin.php:104
+msgid "Advanced options"
+msgstr ""
+
+#: admin_page/plugin.php:107
+msgid "Add options"
+msgstr ""
+
+#: admin_page/plugin.php:113
+msgid "Images"
+msgstr ""
+
+#: admin_page/plugin.php:115
+msgid "Image sizes"
+msgstr ""
+
+#: admin_page/plugin.php:118
+msgid "List of all registered image sizes from active theme and plugins"
+msgstr ""
+
+#: admin_page/plugin.php:125
+msgid "Uncheck sizes you don't need anymore."
+msgstr ""
+
+#: admin_page/plugin.php:131
+msgid "You can also create new size(s) (used with a previous theme)"
+msgstr ""
+
+#: admin_page/plugin.php:138
+msgid "Add new image size"
+msgstr ""
+
+#: admin_page/plugin.php:142
+msgid "SVG support"
+msgstr ""
+
+#: admin_page/plugin.php:143
+msgid "Add support for SVG inside WordPress Media Uploader."
+msgstr ""
+
+#: admin_page/plugin.php:145
+msgid "There is a potential security risk with this. Delete this when you think you will not use it anymore (Learn how to delete this part)."
+msgstr ""
+
+#: admin_page/plugin.php:147
+msgid "Widgets"
+msgstr ""
+
+#: admin_page/plugin.php:149
+msgid "List of default WordPress widgets."
+msgstr ""
+
+#: admin_page/plugin.php:151
+msgid "Uncheck default WordPress Widgets you don't need anymore."
+msgstr ""
+
+#: admin_page/plugin.php:155
+msgid "Accept shortcode in widget"
+msgstr ""
+
+#: admin_page/plugin.php:157
+msgid "Widgets can't use shortcode. Check this box and it will be possible."
+msgstr ""
+
+#: admin_page/plugin.php:161
+msgid "Search results"
+msgstr ""
+
+#: admin_page/plugin.php:164
+msgid "Modify search results URL"
+msgstr ""
+
+#: admin_page/plugin.php:166
+msgid "Search results URL will be https://ndd.com/search/query instead of https://ndd.com/?s=query. You maybe need to save your permalink after theme activation."
+msgstr ""
+
+#: admin_page/plugin.php:170
+msgid "Add post type to search result."
+msgstr ""
+
+#: admin_page/plugin.php:173
+msgid "Administration UI"
+msgstr ""
+
+#: admin_page/plugin.php:175
+msgid "Add column in post and page in admin list table."
+msgstr ""
+
+#: admin_page/plugin.php:177
+msgid "Add thumbnail column"
+msgstr ""
+
+#: admin_page/plugin.php:182
+#: admin_page/plugin.php:195
+msgid "Post"
+msgstr ""
+
+#: admin_page/plugin.php:186
+#: admin_page/plugin.php:199
+msgid "Page"
+msgstr ""
+
+#: admin_page/plugin.php:192
+msgid "Add ID column"
+msgstr ""
+
+#: admin_page/plugin.php:206
+msgid "Supports"
+msgstr ""
+
+#: admin_page/plugin.php:210
+msgid "If you do not know how it works, don't try to manage supports!"
+msgstr ""
+
+#: admin_page/plugin.php:250
+msgid "Create child theme"
+msgstr ""
+
+#: blocks/pub-wpserveur.php:23
+msgid "Install Migrate Guru"
+msgstr ""
+
+#: blocks/pub-wpserveur.php:35
+msgid "Enable Migrate Guru"
+msgstr ""
+
+#: blocks/pub-wpserveur.php:60
+msgid "Discover the specialized WordPress hosting with WPServeur!"
+msgstr ""
+
+#: blocks/pub-wpserveur.php:61
+msgid "For fast, secure and efficient hosting."
+msgstr ""
+
+#: blocks/pub-wpserveur.php:62
+msgid "We only do WordPress but we do it well!"
+msgstr ""
+
+#: blocks/pub-wpserveur.php:63
+msgid "(-10% discount on your subscription with the promo code <strong>WPSC&T</strong>)"
+msgstr ""
+
+#: blocks/pub-wpserveur.php:67
+msgid "Subscribe to WPServeur"
+msgstr ""
+
+#: blocks/pub-wpserveur.php:71
+#: blocks/pub.php:71
+msgid "More about %s"
+msgstr ""
+
+#: blocks/pub.php:33
+msgid "Install"
+msgstr ""
+
+#: blocks/pub.php:45
+msgid "Enable"
+msgstr ""
+
+#: classes/helpers.php:109
+msgid "Failed to create files"
+msgstr ""
+
+#: classes/helpers.php:117
+msgid "Your child theme"
+msgstr ""
+
+#: classes/helpers.php:140
+msgid "Child theme created"
+msgstr ""
+
+#: classes/helpers.php:141
+msgid "Download child theme"
+msgstr ""
+
+#: classes/plugin.php:67
+msgid "Select or upload new file for screenshot"
+msgstr ""
+
+#: classes/plugin.php:69
+msgid "Modify screenshot"
+msgstr ""
+
+#: classes/plugin.php:70
+msgid "Image size name"
+msgstr ""
+
+#: classes/plugin.php:71
+msgid "Image size slug"
+msgstr ""
+
+#: classes/plugin.php:72
+msgid "Width"
+msgstr ""
+
+#: classes/plugin.php:73
+msgid "Height"
+msgstr ""
+
+#: classes/plugin.php:74
+msgid "default px"
+msgstr ""
+
+#: classes/plugin.php:122
+msgid "Child Theme Generator"
+msgstr ""
